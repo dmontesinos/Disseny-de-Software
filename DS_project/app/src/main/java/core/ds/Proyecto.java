@@ -20,4 +20,8 @@ public class Proyecto extends Actividad {
     public void setTarea(Actividad act){
         actividades.add(act);
     }
+
+    public ArrayList<Actividad> getProyectos(){
+        return actividades;
+    }
 }

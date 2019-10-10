@@ -3,10 +3,7 @@ package core.ds;
 import java.util.ArrayList;
 
 public class Cliente {
-    public static void main(String[] args) {
-
-        ArrayList<Proyecto> listaProyectos = new ArrayList<>();
-
+    public static void inicializacion(ArrayList<Proyecto> listaProyectos){
         Proyecto proyecto1, proyecto2;
         proyecto1 = new Proyecto("P1", null);
         proyecto2 = new Proyecto("P2", proyecto1);
@@ -20,11 +17,21 @@ public class Cliente {
         proyecto1.setTarea(proyecto2);
 
         listaProyectos.add(proyecto1);
+    }
 
+    public static void mostrarActividades(ArrayList<Proyecto> listaProyectos){
         for (Proyecto pro: listaProyectos) {
             System.out.println("Nom  Temps inici      Temps final     Durada(hh:mm:ss)");
             System.out.println("----+----------------+---------------+----------------");
             pro.mostrar();
         }
+    }
+
+    public static void main(String[] args) {
+        GenerarReloj reloj = new GenerarReloj(2);
+
+        ArrayList<Proyecto> listaProyectos = new ArrayList<>();
+        inicializacion(listaProyectos);
+        mostrarActividades(listaProyectos);
     }
 }

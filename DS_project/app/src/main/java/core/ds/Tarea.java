@@ -11,10 +11,10 @@ public class Tarea extends Actividad{
         System.out.println(this.getNombre());
     }
 
-    /*@Override
+    @Override
     public String toString(){
         String a = super.toString();
         return String.format("%s", a);
-    }*/
+    }
 }
 

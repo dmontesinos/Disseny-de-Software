@@ -52,7 +52,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.uso_Coche">
+  <component name="RunManager" selected="Application.ObserverClass">
+    <configuration name="ObserverClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ObservablePattern.ObserverClass" />
+      <module name="Aprendiendo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ObservablePattern.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Uso_Empleado" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="poo.Uso_Empleado" />
       <module name="Aprendiendo" />
@@ -81,6 +94,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ObserverClass" />
         <item itemvalue="Application.uso_Coche" />
         <item itemvalue="Application.Uso_Empleado" />
       </list>
@@ -98,6 +112,7 @@
       <updated>1570022699917</updated>
       <workItem from="1570022702316" duration="7608000" />
       <workItem from="1570043720395" duration="825000" />
+      <workItem from="1570734434360" duration="1222000" />
     </task>
     <servers />
   </component>
@@ -109,7 +124,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
