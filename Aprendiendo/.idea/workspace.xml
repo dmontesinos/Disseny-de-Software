@@ -52,7 +52,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ObserverClass">
+  <component name="RunManager" selected="Application.Fechas">
+    <configuration name="Fechas" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Fechas" />
+      <module name="Aprendiendo" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ObserverClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ObservablePattern.ObserverClass" />
       <module name="Aprendiendo" />
@@ -94,6 +101,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Fechas" />
         <item itemvalue="Application.ObserverClass" />
         <item itemvalue="Application.uso_Coche" />
         <item itemvalue="Application.Uso_Empleado" />
@@ -113,6 +121,8 @@
       <workItem from="1570022702316" duration="7608000" />
       <workItem from="1570043720395" duration="825000" />
       <workItem from="1570734434360" duration="1222000" />
+      <workItem from="1570886445526" duration="6000" />
+      <workItem from="1571080881407" duration="1810000" />
     </task>
     <servers />
   </component>

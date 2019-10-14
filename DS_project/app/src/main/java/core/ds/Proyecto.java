@@ -11,7 +11,8 @@ public class Proyecto extends Actividad {
     }
 
     public void mostrar(){
-        System.out.println(this.getNombre()+"\t Temps inici\t"+"  Temps Final\t"+"  Durada");
+        //System.out.println(this.getNombre()+"\t Temps inici\t"+"  Temps Final\t"+"  Durada");
+        System.out.println(this.getNombre()+"\t"+this.getPadre()+"  Temps Final\t"+"  Durada");
         for (Actividad act: actividades) {
             act.mostrar();
         }

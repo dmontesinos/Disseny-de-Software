@@ -23,10 +23,11 @@ public class Actividad {
         return padre;
     }
 
-    @Override
+    /*@Override
     public String toString(){
+
         return String.format("%s", getNombre());
-    }
+    }*/
 
     public void mostrar(){}
 }

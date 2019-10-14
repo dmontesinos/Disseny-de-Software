@@ -3,8 +3,9 @@ package core.ds;
 import java.util.ArrayList;
 
 public class Cliente {
-    public static void inicializacion(ArrayList<Proyecto> listaProyectos){
+    public static void inicializacion(ArrayList<Proyecto> listaProyectos, Reloj reloj){
         Proyecto proyecto1, proyecto2;
+
         proyecto1 = new Proyecto("P1", null);
         proyecto2 = new Proyecto("P2", proyecto1);
 
@@ -17,6 +18,9 @@ public class Cliente {
         proyecto1.setTarea(proyecto2);
 
         listaProyectos.add(proyecto1);
+
+        tarea1.iniciarTemporizador(reloj);
+        tarea2.iniciarTemporizador(reloj);
     }
 
     public static void mostrarActividades(ArrayList<Proyecto> listaProyectos){
@@ -28,10 +32,10 @@ public class Cliente {
     }
 
     public static void main(String[] args) {
-        GenerarReloj reloj = new GenerarReloj(2);
+        Reloj reloj = new Reloj(2);
 
         ArrayList<Proyecto> listaProyectos = new ArrayList<>();
-        inicializacion(listaProyectos);
+        inicializacion(listaProyectos,reloj);
         mostrarActividades(listaProyectos);
     }
 }
