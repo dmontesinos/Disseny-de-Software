@@ -1,5 +1,6 @@
-package core.ds;
+package DS.core;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class Proyecto extends Actividad {
@@ -10,19 +11,44 @@ public class Proyecto extends Actividad {
         actividades = new ArrayList<Actividad>();
     }
 
-    public void mostrar(){
-        //System.out.println(this.getNombre()+"\t Temps inici\t"+"  Temps Final\t"+"  Durada");
-        System.out.println(this.getNombre()+"\t"+this.getPadre()+"  Temps Final\t"+"  Durada");
-        for (Actividad act: actividades) {
-            act.mostrar();
-        }
-    }
 
-    public void setTarea(Actividad act){
+    //Comprobar si necesario
+    public void anadir(Actividad act){
         actividades.add(act);
     }
 
-    public ArrayList<Actividad> getProyectos(){
+    public ArrayList<Actividad> getActividades(){
         return actividades;
+    }
+
+    public void printar(){
+        if(getPadre()==null){
+            System.out.println("\nNom          Temps inici           Temps final           Durada(hh:mm:ss)");
+            System.out.println("----+------------------------+-------------------------+--------------------------");
+        }
+        System.out.print(this.getNombre());
+        if(getHoraInicio()!=null && getHoraFinal()!=null) {
+           /* SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+            SimpleDateFormat formatDay = new SimpleDateFormat("dd-MM-yy");
+            System.out.print(" \t\t" + formatDay.format(getHoraInicio()) + " " + format.format(getHoraInicio()));
+            System.out.print(" \t\t" + formatDay.format(getHoraFinal()) + " " + format.format(getHoraFinal()));*/
+            System.out.print("\t\t" + sdf.format(getHoraInicio()) +"\t\t"+ sdf.format(getHoraFinal()));
+            /*long time = getDuracionTotal();
+            time=time/1000;
+            int horas = ((int)time / 3600);
+            int minutos = (((int)time - horas * 3600) / 60);
+            int segundos = (int)time - (horas * 3600 + minutos * 60);
+            System.out.print("\t\t\t" +horas+":"+minutos+":"+segundos+"\n");*/
+            System.out.print("\t\t\t" + getDuracionTotal()+"\n");
+        }
+        else{
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t00:00:00");
+        }
+        for (Actividad a: actividades) {
+
+            a.printar();
+
+
+        }
     }
 }

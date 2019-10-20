@@ -1,60 +1,66 @@
-package core.ds;
+package DS.core;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Calendar;
 import java.util.Date;
 
-//public class Intervalo implements PropertyChangeListener {
-public class Intervalo {
-    private Date fechaInicio;
-    private Date fechaFinal;
-    private double diferencia;
+import static DS.core.Cliente.SEGUNDOS;
+
+public class Intervalo implements PropertyChangeListener{
+    private Date horaInicio;
+    private Date horaFinal;
+    private Tarea tareaPadre;
+    private long duracion;
 
 
-    /*public void propertyChange(PropertyChangeEvent evt) {
-        //assert evt.getPropertyName().equals("last news");
-        //String news = (String) evt.getNewValue();
-        //System.out.println(news);
-        //Hay que sobreescribir este metodo de la interficie, esta es la que se encarga de establecer los intervalos
-        //que obtenemos de escuchar el temporizador
-    }*/
-
-    public void Intervalo(Date inicio){
-        this.fechaInicio = inicio;
+    public Intervalo( Date horaInicio,Tarea padre){
+        this.horaInicio = horaInicio;
+        setTareaPadre(padre);
     }
 
-    public void setInicio(Date valor){
-        fechaInicio = valor;
+    public Date getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setFechaFinal(Date valor){
-        fechaFinal = valor;
+    public void setHoraInicio(Date horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
-    public Date getFechaInicio(){
-        return fechaInicio;
-    }
-    public Date getFechaFinal(){
-        return fechaFinal;
+    public Date getHoraFinal() {
+        return horaFinal;
     }
 
-    public void crearIntervalo(){
-        //Hacer aqui que el intervalo consulte al reloj para obtener tiempo
-        //con la llamada a propertyChange();
+    public void setHoraFinal(Date horaFinal) {
+        this.horaFinal = horaFinal;
     }
 
-    public void intervaloTotal(){
-        diferencia = (double) fechaFinal.getTime()-fechaInicio.getTime();
+    public Tarea getTareaPadre() {
+        return tareaPadre;
     }
 
-    public void mostrar(){
-        System.out.println(diferencia);
+    public void setTareaPadre(Tarea tareaPadre) {
+        this.tareaPadre = tareaPadre;
     }
 
+    public void setDuracion(long valor){
+        duracion = valor;
+    }
 
+    public long getDuracion(){
+        return duracion;
+    }
 
-
-
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        setHoraFinal((Date) evt.getNewValue());
+        this.duracion += SEGUNDOS;
+        /*duracion = this.horaFinal.getTime() - this.horaInicio.getTime() ;
+        duracion = (int)Math.ceil(duracion/1000.0);*/
+    }
 
 }
+
+
+
+
+

@@ -1,41 +1,46 @@
-package core.ds;
+package DS.core;
 
 import java.util.ArrayList;
 
+import static java.lang.Thread.sleep;
+
 public class Cliente {
-    public static void inicializacion(ArrayList<Proyecto> listaProyectos, Reloj reloj){
-        Proyecto proyecto1, proyecto2;
+    static final int SEGUNDOS = 2; // Milliseconds
 
-        proyecto1 = new Proyecto("P1", null);
-        proyecto2 = new Proyecto("P2", proyecto1);
+    public static void main(String[] args) throws InterruptedException{
+        //Creacion del reloj
+        //Creacion del arbol de proyectos
 
-        Tarea tarea1 = new Tarea("T1", proyecto1);
-        Tarea tarea2 = new Tarea("T2", proyecto1);
 
-        proyecto1.setTarea(tarea1);
-        proyecto1.setTarea(tarea2);
 
-        proyecto1.setTarea(proyecto2);
+        Proyecto proy1, proy2;
+        proy1 = new Proyecto("P1", null);
+        Tarea tarea3 = new Tarea("T3", proy1);
+        proy2 = new Proyecto("P2", proy1);
 
-        listaProyectos.add(proyecto1);
+        proy1.anadir(tarea3);
+        proy1.anadir(proy2);
 
-        tarea1.iniciarTemporizador(reloj);
-        tarea2.iniciarTemporizador(reloj);
-    }
+        Tarea tarea1 = new Tarea("T1", proy2);
+        Tarea tarea2 = new Tarea("T2", proy2);
 
-    public static void mostrarActividades(ArrayList<Proyecto> listaProyectos){
-        for (Proyecto pro: listaProyectos) {
-            System.out.println("Nom  Temps inici      Temps final     Durada(hh:mm:ss)");
-            System.out.println("----+----------------+---------------+----------------");
-            pro.mostrar();
-        }
-    }
+        proy2.anadir(tarea1);
 
-    public static void main(String[] args) {
-        Reloj reloj = new Reloj(2);
+        proy2.anadir(tarea2);
 
-        ArrayList<Proyecto> listaProyectos = new ArrayList<>();
-        inicializacion(listaProyectos,reloj);
-        mostrarActividades(listaProyectos);
+        tarea3.iniciarTarea(Reloj.getInstanciaReloj());
+
+        sleep(3000);
+        tarea3.detenerTarea(Reloj.getInstanciaReloj());
+        //imprimirActividades(proy1);
+
+        sleep(7000);
+        tarea2.iniciarTarea(Reloj.getInstanciaReloj());
+        sleep(10000);
+        tarea2.detenerTarea(Reloj.getInstanciaReloj());
+        tarea3.iniciarTarea(Reloj.getInstanciaReloj());
+        sleep(2000);
+        tarea3.detenerTarea(Reloj.getInstanciaReloj());
+
     }
 }
