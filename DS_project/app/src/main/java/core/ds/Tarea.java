@@ -2,15 +2,16 @@ package core.ds;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 
 import static core.ds.Cliente.SEGUNDOS;
 
 public class Tarea extends Actividad{
-    public ArrayList<Intervalo> intervalos;
+    public LinkedList<Intervalo> intervalos;
 
     public Tarea(String nombre, Proyecto proyecto){
         super(nombre,proyecto);
-        intervalos = new ArrayList<Intervalo>();
+        intervalos = new LinkedList<Intervalo>();
     }
 
     /* Iniciamos creando una fecha nueva actual.
@@ -19,7 +20,8 @@ public class Tarea extends Actividad{
     Añadimos el intervalo al array.
     Añadimos al array de Listeners del reloj ya creado la tarea, ya escuchando.
      */
-    public void iniciarTarea(Reloj reloj) {
+    public void iniciarTarea() {
+        Reloj reloj = Reloj.getInstanciaReloj();
         Date fecha = new Date();
         actualizarInicio(fecha);
         Intervalo intervalo = new Intervalo(fecha,this);
@@ -31,12 +33,15 @@ public class Tarea extends Actividad{
         this.setHoraFinal(null);
     }
 
-    public void detenerTarea(Reloj reloj){
-        Intervalo intervalo = this.intervalos.get(this.intervalos.size() - 1);
-        Proyecto proyecto = getPadre();
-        reloj.borrarObservador(intervalo);
+    public void detenerTarea(){
+        Reloj reloj = Reloj.getInstanciaReloj();
+        Intervalo intervalo = intervalos.getLast();
         this.setHoraFinal(intervalo.getHoraFinal());
-        reloj.printarArbol(proyecto);
+        reloj.borrarObservador(intervalo);
+
+        /*Proyecto proyecto = getPadre();
+        reloj.printarArbol(proyecto);*/
+
     }
 
 
@@ -56,14 +61,24 @@ public class Tarea extends Actividad{
         }
     }
 
-    public void calcularTiempoTotal(){
+    /*public void calcularTiempoTotal(){
         long total = 0;
-        if(this.getPadre() != null) {
 
-            for (Intervalo i:intervalos){
-                total += i.getDuracionTotal();
-            }
+        for (Intervalo i: intervalos){
+            total += i.getDuracionTotal();
         }
+
         this.setDuracionTotal(total);
+    }*/
+
+    public long getDuracionTotal(){
+        long total = 0;
+
+        for (Intervalo i: intervalos){
+            total += i.getDuracionTotal();
+        }
+
+        return total;
     }
+
 }

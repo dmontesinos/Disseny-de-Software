@@ -16,6 +16,8 @@ public class Intervalo implements PropertyChangeListener{
     public Intervalo( Date horaInicio,Tarea padre){
         this.horaInicio = horaInicio;
         setTareaPadre(padre);
+        duracionTotal = 0;
+        horaFinal = null;
     }
 
     public Date getHoraInicio() {

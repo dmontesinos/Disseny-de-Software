@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public abstract class  Actividad {
-
     private String nombre;
     private Proyecto padre;
     private Date horaInicio;
@@ -27,10 +26,12 @@ public abstract class  Actividad {
 
     public void printar(){ }
 
-    public long getDuracionTotal() {
+    /*public long getDuracionTotal() {
         calcularTiempoTotal();
         return duracionTotal;
-    }
+    }*/
+
+    public abstract long getDuracionTotal();
 
     public void setDuracionTotal(long valor){
         duracionTotal = valor;
@@ -39,7 +40,6 @@ public abstract class  Actividad {
     public String getNombre() {
         return nombre;
     }
-
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -65,7 +65,6 @@ public abstract class  Actividad {
         this.horaFinal = horaFinal;
     }
 
-    //RE
     public void actualizarInicio(Date fecha) {
         if(horaInicio == null)
         {
@@ -84,7 +83,7 @@ public abstract class  Actividad {
         setHoraFinal(fecha);
     }
 
-    public void calcularTiempoTotal(){}
+    //public void calcularTiempoTotal(){}
 
 }
 
