@@ -1,4 +1,4 @@
-package DS.core;
+package core.ds;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -10,7 +10,7 @@ public abstract class  Actividad {
     private Proyecto padre;
     private Date horaInicio;
     private Date horaFinal;
-    private long duracionTotal;
+    protected long duracionTotal;
     protected SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
 
     public Actividad(String nombre,Proyecto padre){
@@ -25,12 +25,10 @@ public abstract class  Actividad {
         return String.format("%s", getNombre());
     }
 
-    public void printar(){
-
-
-    }
+    public void printar(){ }
 
     public long getDuracionTotal() {
+        calcularTiempoTotal();
         return duracionTotal;
     }
 
@@ -86,4 +84,8 @@ public abstract class  Actividad {
         }
         setHoraFinal(fecha);
     }
+
+    public void calcularTiempoTotal(){}
+
 }
+

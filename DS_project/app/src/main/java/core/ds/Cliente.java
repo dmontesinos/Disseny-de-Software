@@ -1,4 +1,4 @@
-package DS.core;
+package core.ds;
 
 import java.util.ArrayList;
 
@@ -41,6 +41,7 @@ public class Cliente {
         tarea3.iniciarTarea(Reloj.getInstanciaReloj());
         sleep(2000);
         tarea3.detenerTarea(Reloj.getInstanciaReloj());
-
+        tarea1.iniciarTarea(Reloj.getInstanciaReloj());
+        tarea2.iniciarTarea(Reloj.getInstanciaReloj());
     }
 }

@@ -1,4 +1,4 @@
-package DS.core;
+package core.ds;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -8,9 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static DS.core.Cliente.SEGUNDOS;
+import static core.ds.Cliente.SEGUNDOS;
 
-public class Tarea extends Actividad implements PropertyChangeListener {
+public class Tarea extends Actividad{
     public ArrayList<Intervalo> intervalos;
 
     public Tarea(String nombre, Proyecto proyecto){
@@ -29,7 +29,7 @@ public class Tarea extends Actividad implements PropertyChangeListener {
         actualizarInicio(fecha);
         Intervalo intervalo = new Intervalo(fecha,this);
         intervalos.add(intervalo);
-        reloj.anadirObservador(this);
+        reloj.anadirObservador(intervalo);
 
         if(this.getHoraInicio() == null)
             this.setHoraInicio(new Date());
@@ -40,8 +40,9 @@ public class Tarea extends Actividad implements PropertyChangeListener {
         Intervalo intervalo = this.intervalos.get(this.intervalos.size() - 1);
         Proyecto proyecto = getPadre();
         reloj.borrarObservador(intervalo);
-        reloj.borrarObservador(this);
         this.setHoraFinal(intervalo.getHoraFinal());
+
+        //reloj.borrarObservador(this);
 
         /*long calculoDuracion = getDuracionTotal();
         calculoDuracion += SEGUNDOS;
@@ -63,21 +64,10 @@ public class Tarea extends Actividad implements PropertyChangeListener {
     }
     public void printar(){
         System.out.print(this.getNombre());
-        if(getHoraInicio()!=null && getHoraFinal()!=null) {
-
-           /* SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-            SimpleDateFormat formatDay = new SimpleDateFormat("dd-MM-yy");
-            System.out.println();
-            System.out.print(" \t\t" + formatDay.format(getHoraInicio()) + " " + format.format(getHoraInicio()));
-            System.out.print(" \t\t" + formatDay.format(getHoraFinal()) + " " + format.format(getHoraFinal()));*/
+        if(getHoraInicio() != null && getHoraFinal() != null) {
             System.out.print("\t\t" + sdf.format(getHoraInicio()) +"\t\t"+ sdf.format(getHoraFinal()));
-            //System.out.println(this.getNombre() + "    " + getHoraInicio() + "    " + getHoraFinal() + "     ");
-            long time = getDuracionTotal();
-            /*time=time/1000;
-            int horas = ((int)time / 3600);
-            int minutos = (((int)time - horas * 3600) / 60);
-            int segundos = (int)time - (horas * 3600 + minutos * 60);
-            System.out.print("\t\t\t" +horas+":"+minutos+":"+segundos+"\n");*/
+            //long time = getDuracionTotal();
+
             System.out.print("\t\t\t" + getDuracionTotal()+"\n");
         }
         else{
@@ -85,7 +75,7 @@ public class Tarea extends Actividad implements PropertyChangeListener {
         }
     }
 
-    @Override
+    /*@Override
     public void propertyChange(PropertyChangeEvent evt) {
         assert evt.getPropertyName().equals("actualizacionHora");
         Date nuevaHoraSistema = (Date) evt.getNewValue(); //Recoge la nueva hora del reloj actualizada
@@ -103,13 +93,25 @@ public class Tarea extends Actividad implements PropertyChangeListener {
         {
             calculoDuracion += this.getPadre().getDuracionTotal();
             this.getPadre().setDuracionTotal(calculoDuracion);
-        }*/
+        }
+    }*/
+
+    public void calcularTiempoTotal(){
+        long total = 0;
+        if(this.getPadre() != null) {
+
+            for (Intervalo i:intervalos){
+                total += i.getDuracionTotal();
+            }
+        }
+        this.setDuracionTotal(total);
     }
 
-    public void actualizarDuracion(long duracion) {
+
+    /*public void actualizarDuracion(long duracion) {
         if (this.getPadre() != null) {
             this.getPadre().setDuracionTotal(duracion);
         }
         this.setDuracionTotal(duracion);
-    }
+    }*/
 }

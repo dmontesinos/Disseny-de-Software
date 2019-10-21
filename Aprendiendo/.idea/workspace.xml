@@ -52,7 +52,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Fechas">
+  <component name="RunManager" selected="Application.PruebasFechas">
     <configuration name="Fechas" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Fechas" />
       <module name="Aprendiendo" />
@@ -69,6 +69,13 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PruebasFechas" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="PruebasFechas" />
+      <module name="Aprendiendo" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -101,6 +108,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.PruebasFechas" />
         <item itemvalue="Application.Fechas" />
         <item itemvalue="Application.ObserverClass" />
         <item itemvalue="Application.uso_Coche" />
@@ -124,6 +132,7 @@
       <workItem from="1570886445526" duration="6000" />
       <workItem from="1571080881407" duration="1810000" />
       <workItem from="1571335604177" duration="57000" />
+      <workItem from="1571661557110" duration="1940000" />
     </task>
     <servers />
   </component>

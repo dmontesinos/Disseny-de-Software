@@ -1,10 +1,10 @@
-package DS.core;
-
+package core.ds;
 import java.sql.Time;
 import java.util.ArrayList;
 
 public class Proyecto extends Actividad {
     public ArrayList<Actividad> actividades;
+
 
     public Proyecto(String nombre, Proyecto padre){
         super(nombre,padre);
@@ -50,5 +50,18 @@ public class Proyecto extends Actividad {
 
 
         }
+    }
+
+    public void setDuracionTotal(long duracion){
+        this.duracionTotal = duracion;
+    }
+
+    public void calcularTiempoTotal(){
+        long total = 0;
+
+        for(Actividad a: actividades){
+            total += a.getDuracionTotal();
+        }
+        setDuracionTotal(total);
     }
 }

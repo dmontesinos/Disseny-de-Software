@@ -1,4 +1,4 @@
-package DS.core;
+package core.ds;
 
 import androidx.appcompat.app.AppCompatActivity;
 

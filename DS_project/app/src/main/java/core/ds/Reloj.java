@@ -1,4 +1,4 @@
-package DS.core;
+package core.ds;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static DS.core.Cliente.SEGUNDOS;
+import static core.ds.Cliente.SEGUNDOS;
 
 public class Reloj extends TimerTask {
 
@@ -52,16 +52,16 @@ public class Reloj extends TimerTask {
     public void anadirObservador(Intervalo intervalo){
         notificador.addPropertyChangeListener(intervalo);
     }
-    public void anadirObservador(Tarea tarea){
+    /*public void anadirObservador(Tarea tarea){
         notificador.addPropertyChangeListener(tarea);
-    }
+    }*/
 
     public void borrarObservador(Intervalo intervalo){
         notificador.removePropertyChangeListener(intervalo);
     }
-    public void borrarObservador(Tarea tarea){
+    /*public void borrarObservador(Tarea tarea){
         notificador.removePropertyChangeListener(tarea);
-    }
+    }*/
 
     public Timer getReloj() {
         return reloj;
