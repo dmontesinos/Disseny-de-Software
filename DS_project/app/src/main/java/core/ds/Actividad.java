@@ -77,7 +77,6 @@ public abstract class  Actividad {
         }
     }
 
-    //RE
     public void actualizarFinal(Date fecha) {
         if (padre != null) {
             padre.actualizarFinal(fecha);

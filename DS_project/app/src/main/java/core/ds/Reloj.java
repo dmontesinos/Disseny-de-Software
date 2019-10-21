@@ -9,16 +9,12 @@ import java.util.TimerTask;
 import static core.ds.Cliente.SEGUNDOS;
 
 public class Reloj extends TimerTask {
-
-    //private static final int SEGUNDOS = 2;
     private static final long MILISEGUNDOS = 1000;
     private static Reloj instanciaReloj = null;
     private Reloj.Notificador notificador = new Reloj.Notificador();
     private static Timer reloj = null;
     Proyecto proyectoRaiz;
 
-
-    //RE
     private Reloj() { //Esto es una clase Bean
         reloj = new Timer();//Daemon para que el thread corra de fondo
         reloj.scheduleAtFixedRate(this, 0, SEGUNDOS * MILISEGUNDOS);
@@ -52,16 +48,10 @@ public class Reloj extends TimerTask {
     public void anadirObservador(Intervalo intervalo){
         notificador.addPropertyChangeListener(intervalo);
     }
-    /*public void anadirObservador(Tarea tarea){
-        notificador.addPropertyChangeListener(tarea);
-    }*/
 
     public void borrarObservador(Intervalo intervalo){
         notificador.removePropertyChangeListener(intervalo);
     }
-    /*public void borrarObservador(Tarea tarea){
-        notificador.removePropertyChangeListener(tarea);
-    }*/
 
     public Timer getReloj() {
         return reloj;

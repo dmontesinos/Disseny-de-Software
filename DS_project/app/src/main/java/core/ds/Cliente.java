@@ -8,11 +8,6 @@ public class Cliente {
     static final int SEGUNDOS = 2; // Milliseconds
 
     public static void main(String[] args) throws InterruptedException{
-        //Creacion del reloj
-        //Creacion del arbol de proyectos
-
-
-
         Proyecto proy1, proy2;
         proy1 = new Proyecto("P1", null);
         Tarea tarea3 = new Tarea("T3", proy1);
@@ -32,7 +27,6 @@ public class Cliente {
 
         sleep(3000);
         tarea3.detenerTarea(Reloj.getInstanciaReloj());
-        //imprimirActividades(proy1);
 
         sleep(7000);
         tarea2.iniciarTarea(Reloj.getInstanciaReloj());

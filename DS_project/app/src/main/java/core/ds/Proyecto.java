@@ -12,7 +12,6 @@ public class Proyecto extends Actividad {
     }
 
 
-    //Comprobar si necesario
     public void anadir(Actividad act){
         actividades.add(act);
     }
