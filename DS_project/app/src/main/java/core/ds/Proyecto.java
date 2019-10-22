@@ -1,5 +1,5 @@
 package core.ds;
-import java.sql.Time;
+
 import java.util.ArrayList;
 
 public class Proyecto extends Actividad {
@@ -20,6 +20,9 @@ public class Proyecto extends Actividad {
         return actividades;
     }
 
+    /* Función encargada de mostrar los objetos de la estructura del árbol de tipo proyecto. Además,
+    como la raíz del árbol es un proyecto, en caso de situarnos en dicha raíz, mostramos una
+    cabecera.*/
     public void printar(){
         if(getPadre()==null){
             System.out.println("\nNom          Temps inici           Temps final           Durada(hh:mm:ss)");
@@ -42,15 +45,8 @@ public class Proyecto extends Actividad {
         this.duracionTotal = duracion;
     }
 
-    /*public void calcularTiempoTotal(){
-        long total = 0;
-
-        for(Actividad a: actividades){
-            total += a.getDuracionTotal();
-        }
-        setDuracionTotal(total);
-    }*/
-
+    /*Función recursiva encargada de calcular el tiempo total del proyecto. Para ello, coge las
+    actividades que cuelgan del array de esta clase y suma recursivamente los tiempos de sus objetos.*/
     public long getDuracionTotal(){
         long total = 0;
 
@@ -58,14 +54,5 @@ public class Proyecto extends Actividad {
             total += a.getDuracionTotal();
         }
         return total;
-    }
-
-    public Proyecto obtenerRaiz(Proyecto valor){
-        if(valor.getPadre() != null){
-            obtenerRaiz(valor);
-        } else {
-            return valor;
-        }
-        return this;
     }
 }

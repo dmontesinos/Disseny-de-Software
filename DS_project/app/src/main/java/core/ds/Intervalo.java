@@ -54,15 +54,15 @@ public class Intervalo implements PropertyChangeListener{
 
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        assert evt.getPropertyName().equals("actualizacionHora");
+    public void propertyChange(PropertyChangeEvent evt) { //Permite recibir las actualizaciones del reloj
+        assert evt.getPropertyName().equals("actualizacionHora"); //Debug
         Date nuevaHoraSistema = (Date) evt.getNewValue(); //Recoge la nueva hora del reloj actualizada
         setHoraFinal(nuevaHoraSistema);
-        duracionTotal += SEGUNDOS;
-        this.actualizarPadreRec(nuevaHoraSistema);
+        duracionTotal += SEGUNDOS; //Por cada tick, aumentamos la duración total del intérvalo
+        this.actualizarPadreRec(nuevaHoraSistema); //Actualizamos recursivamente la hora final del/los padres
     }
 
-    public void actualizarPadreRec(Date nuevaHoraSistema){
+    public void actualizarPadreRec(Date nuevaHoraSistema){ //Subimos las fechas hasta la raíz
         if(this.getTareaPadre() != null){
             tareaPadre.actualizarFinal(nuevaHoraSistema);
         }

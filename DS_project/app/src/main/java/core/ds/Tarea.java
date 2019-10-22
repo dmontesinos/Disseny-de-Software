@@ -1,25 +1,19 @@
 package core.ds;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
-import static core.ds.Cliente.SEGUNDOS;
 
 public class Tarea extends Actividad{
     public LinkedList<Intervalo> intervalos;
 
     public Tarea(String nombre, Proyecto proyecto){
         super(nombre,proyecto);
-        intervalos = new LinkedList<Intervalo>();
+        intervalos = new LinkedList<>();
     }
 
-    /* Iniciamos creando una fecha nueva actual.
-    Actualizamos la fecha inicial si es necesario.
-    Creamos un nuevo intervalo.
-    Añadimos el intervalo al array.
-    Añadimos al array de Listeners del reloj ya creado la tarea, ya escuchando.
-     */
+    /* Función encargada de iniciar el crono de una tarea y, por tanto, crear, iniciar y añadir los
+    observers necesarios.*/
     public void iniciarTarea() {
         Reloj reloj = Reloj.getInstanciaReloj();
         Date fecha = new Date();
@@ -33,15 +27,13 @@ public class Tarea extends Actividad{
         this.setHoraFinal(null);
     }
 
+    /* Función encargada cerrar los intérvalos. De misma forma, se asigna la fecha final del
+    intérvalo y es borrado del array de observadores, ya que no queremos más actualizaciones.*/
     public void detenerTarea(){
         Reloj reloj = Reloj.getInstanciaReloj();
         Intervalo intervalo = intervalos.getLast();
         this.setHoraFinal(intervalo.getHoraFinal());
         reloj.borrarObservador(intervalo);
-
-        /*Proyecto proyecto = getPadre();
-        reloj.printarArbol(proyecto);*/
-
     }
 
 
@@ -50,6 +42,8 @@ public class Tarea extends Actividad{
         String a = super.toString();
         return String.format("%s", a);
     }
+
+    /* Función encargada de mostrar los objetos de la estructura del árbol de tipo Tarea. */
     public void printar(){
         System.out.print(this.getNombre());
         if(getHoraInicio() != null && getHoraFinal() != null) {
@@ -61,16 +55,8 @@ public class Tarea extends Actividad{
         }
     }
 
-    /*public void calcularTiempoTotal(){
-        long total = 0;
-
-        for (Intervalo i: intervalos){
-            total += i.getDuracionTotal();
-        }
-
-        this.setDuracionTotal(total);
-    }*/
-
+    /*Función recursiva encargada de calcular el tiempo total de la tarea. Para ello, coge todos los
+    intérvalos pertenecientes al array de intérvalos y los suma*/
     public long getDuracionTotal(){
         long total = 0;
 

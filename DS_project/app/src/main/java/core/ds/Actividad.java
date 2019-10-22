@@ -1,6 +1,5 @@
 package core.ds;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,14 +23,9 @@ public abstract class  Actividad {
         return String.format("%s", getNombre());
     }
 
-    public void printar(){ }
+    public void printar(){} //Cada implementación está en su respectiva clase.
 
-    /*public long getDuracionTotal() {
-        calcularTiempoTotal();
-        return duracionTotal;
-    }*/
-
-    public abstract long getDuracionTotal();
+    public abstract long getDuracionTotal(); //Cada implementación estña en su clase.
 
     public void setDuracionTotal(long valor){
         duracionTotal = valor;
@@ -65,25 +59,25 @@ public abstract class  Actividad {
         this.horaFinal = horaFinal;
     }
 
+
+    /* Recursivamente asignamos la hora inicial de los objetos padre con los que tratemos, siempre
+    y cuando estos tiempos estén a null*/
     public void actualizarInicio(Date fecha) {
-        if(horaInicio == null)
-        {
-            if(padre != null)
-            {
+        if(horaInicio == null) {
+            if(padre != null) {
                 padre.actualizarInicio(fecha);
             }
             setHoraInicio(fecha);
         }
     }
 
+    /* Recursivamente asignamos la hora final de los objetos padre con los que tratemos, en todas
+    las situaciones (debido a que siempre será posterior a null o cualquier fecha)*/
     public void actualizarFinal(Date fecha) {
         if (padre != null) {
             padre.actualizarFinal(fecha);
         }
         setHoraFinal(fecha);
     }
-
-    //public void calcularTiempoTotal(){}
-
 }
 

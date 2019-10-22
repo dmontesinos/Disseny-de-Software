@@ -9,8 +9,8 @@ import java.util.TimerTask;
 import static core.ds.Cliente.SEGUNDOS;
 
 public class Reloj extends TimerTask {
-    private static final long MILISEGUNDOS = 1000;
-    private static Reloj instanciaReloj = null;
+    private static final long MILISEGUNDOS = 1000; //Para posteriores conversiones de tiempo
+    private static Reloj instanciaReloj = null; //Instancia única del reloj
     private Reloj.Notificador notificador = new Reloj.Notificador();
     private static Timer reloj = null;
     Proyecto proyectoRaiz;
@@ -38,7 +38,7 @@ public class Reloj extends TimerTask {
     }
 
     @Override
-    public void run() {
+    public void run() { //Encargado de notificar la nueva fecha y printar el árbol
         notificador.informarNuevaFecha(new Date());
         if(proyectoRaiz != null){
             proyectoRaiz.printar();
@@ -61,7 +61,9 @@ public class Reloj extends TimerTask {
         this.reloj = reloj;
     }
 
-
+    /*Esta clase encapsula los métodos típicos de la implemetación del observer/observable, con la
+    intención de cambiar los nombres a las funciones y hacer más sencilla su utilización. No es
+    necesaria.*/
     private class Notificador{
 
         PropertyChangeSupport providerChangeSupport =  new PropertyChangeSupport(this);
@@ -79,7 +81,6 @@ public class Reloj extends TimerTask {
             providerChangeSupport.firePropertyChange("actualizacionHora", fecha, nuevaFecha);
             fecha = nuevaFecha;
         }
-
     }
 }
 
