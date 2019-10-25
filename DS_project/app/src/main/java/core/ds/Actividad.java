@@ -1,9 +1,13 @@
 package core.ds;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public abstract class  Actividad {
+/* Clase abstracta con métodos destinados a actualizar recursivamente los tiempos finales e
+iniciales. Algunos métodos están implementado en sus hijos, dado que se implementan de forma
+ particular. */
+public abstract class  Actividad implements Serializable {
     private String nombre;
     private Proyecto padre;
     private Date horaInicio;

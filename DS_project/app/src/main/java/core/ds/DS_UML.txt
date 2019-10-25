@@ -1,0 +1,82 @@
+@startuml
+Actividad <|--Proyecto
+Actividad <|--Tarea
+Reloj +-- Notificador
+
+Intervalo "0..N" <--* Tarea 
+Actividad "0..N"<-right-* Proyecto
+
+class Cliente {
+-static final SEGUNDOS
+ +static void main()
++static void test1()
++static void test2()
++static void guardarSerializable(Actividad actividad)
++static Actividad cargarSerializable()
++static void comprobacionSerializable(Actividad actividad)
+}
+
+class Proyecto {
+   +ArrayList<Actividad> actividades
+ +void printar()
+   +void anadir(Actividad act)
+  
+   
+}
+abstract class Actividad implements Serializable{
+   -String nombre
+   -Proyecto padre
+   -Date horaInicio
+   -Date horaFinal
+   #long duracionTotal
+   #SimpledateFormat sdf
+   + void printar()
+   + String toString()
+   +void actualizarInicio(Date fecha)
+   +void actualizarFinal(Date fecha)
+  
+}
+class Tarea{
+   +LinkedList<Intervalo> intervalos
+   +void printar()
+   +String toString()
+   +void iniciarTarea(Reloj reloj)
+   +void detenerTarea(Reloj reloj)
+  
+}
+
+class Intervalo implements PropertyChangeListener,Serializable{
+    -Date horaInicio
+    -Date horaFinal
+    -Tarea tareaPadre
+    -long duracionTotal
+    +void propertyChange(PropertyChange evt)
+    +void actualizarPadreRec(Date NuevaHoraSistema)
+
+
+}
+
+class Reloj extends TimerTask{
+    -static final long MILISEGUNDOS
+    -static Reloj instanciaReloj
+    -Reloj.Notificador notificador
+    -static Timer reloj
+    -private proyectoRaiz
+    -Reloj()
+    +static Reloj getInstanciaReloj()
+    +static void pararReloj()
+    +void printarArbol(Proyecto proyecto)
+    +void run()
+    +void anadirObservador(Intervalo intervalo)
+    +void borrarObservador(Intervalo intervalo)
+
+}
+
+class Notificador{
+    PropertChangeSuport providerChangeSupport
+-Date fecha
++void addPropertyChangeListener(PropertyChangeListener l)
++void removePropertyChangeListener(PropertyChangeListener l)
++void informarNuevaFecha(Date nuevaFecha)
+}
+@enduml

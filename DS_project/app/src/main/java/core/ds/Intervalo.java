@@ -2,11 +2,14 @@ package core.ds;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.Serializable;
 import java.util.Date;
 
 import static core.ds.Cliente.SEGUNDOS;
-
-public class Intervalo implements PropertyChangeListener{
+/* Esta clase básicamente almacena los datos referentes a un intérvalo. Además implementa un
+* Listener contra la clase reloj para actualizar sus tiempos. También implementa el Serializable
+* para almacenar los intérvalos en un fichero externo. */
+public class Intervalo implements PropertyChangeListener, Serializable {
     private Date horaInicio;
     private Date horaFinal;
     private Tarea tareaPadre;
@@ -57,15 +60,12 @@ public class Intervalo implements PropertyChangeListener{
     public void propertyChange(PropertyChangeEvent evt) { //Permite recibir las actualizaciones del reloj
         assert evt.getPropertyName().equals("actualizacionHora"); //Debug
         Date nuevaHoraSistema = (Date) evt.getNewValue(); //Recoge la nueva hora del reloj actualizada
-        setHoraFinal(nuevaHoraSistema);
         duracionTotal += SEGUNDOS; //Por cada tick, aumentamos la duración total del intérvalo
         this.actualizarPadreRec(nuevaHoraSistema); //Actualizamos recursivamente la hora final del/los padres
     }
 
     public void actualizarPadreRec(Date nuevaHoraSistema){ //Subimos las fechas hasta la raíz
-        if(this.getTareaPadre() != null){
-            tareaPadre.actualizarFinal(nuevaHoraSistema);
-        }
+        tareaPadre.actualizarFinal(nuevaHoraSistema);
         setHoraFinal(nuevaHoraSistema);
     }
 }

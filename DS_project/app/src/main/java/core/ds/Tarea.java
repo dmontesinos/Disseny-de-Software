@@ -1,10 +1,13 @@
 package core.ds;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 
-
-public class Tarea extends Actividad{
+/* Clase encargada de almacenar todos los intérvalos de cada tarea. También se encarga de calcular
+* el tiempo total en base a la suma de tiempos totales de los intérvalos. Se encarga de iniciar y
+* detener las tareas y sus respectivos cronómetros. */
+public class Tarea extends Actividad  {
     public LinkedList<Intervalo> intervalos;
 
     public Tarea(String nombre, Proyecto proyecto){
@@ -24,7 +27,6 @@ public class Tarea extends Actividad{
 
         if(this.getHoraInicio() == null)
             this.setHoraInicio(new Date());
-        this.setHoraFinal(null);
     }
 
     /* Función encargada cerrar los intérvalos. De misma forma, se asigna la fecha final del
@@ -63,8 +65,7 @@ public class Tarea extends Actividad{
         for (Intervalo i: intervalos){
             total += i.getDuracionTotal();
         }
-
+        setDuracionTotal(total);
         return total;
     }
-
 }

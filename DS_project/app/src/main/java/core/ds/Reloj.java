@@ -8,6 +8,8 @@ import java.util.TimerTask;
 
 import static core.ds.Cliente.SEGUNDOS;
 
+/* Clase encargada de crear un relój con una sola instancia y notificar a los intervalos que se
+* encuentran en el array de objetos a notificar. Implementa un Singleton para la única instancia. */
 public class Reloj extends TimerTask {
     private static final long MILISEGUNDOS = 1000; //Para posteriores conversiones de tiempo
     private static Reloj instanciaReloj = null; //Instancia única del reloj
@@ -27,13 +29,13 @@ public class Reloj extends TimerTask {
         return instanciaReloj;
     }
 
-    public static void stopReloj(){
+    public static void pararReloj(){
         if( reloj != null) {
             reloj.cancel();
         }
     }
 
-    public void printarArbol(Proyecto proyecto){
+    public void comenzarPrintarArbol(Proyecto proyecto){
         proyectoRaiz = proyecto;
     }
 
@@ -79,7 +81,6 @@ public class Reloj extends TimerTask {
 
         public void informarNuevaFecha(Date nuevaFecha) {
             providerChangeSupport.firePropertyChange("actualizacionHora", fecha, nuevaFecha);
-            fecha = nuevaFecha;
         }
     }
 }

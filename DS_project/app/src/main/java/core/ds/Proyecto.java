@@ -2,6 +2,8 @@ package core.ds;
 
 import java.util.ArrayList;
 
+/* Se encarga de almacenar más proyectos y tareas. También almacena el tiempo total de todos los
+* objetos que le cuelgan. */
 public class Proyecto extends Actividad {
     public ArrayList<Actividad> actividades;
 
@@ -53,6 +55,7 @@ public class Proyecto extends Actividad {
         for(Actividad a: actividades){
             total += a.getDuracionTotal();
         }
+        setDuracionTotal(total);
         return total;
     }
 }
