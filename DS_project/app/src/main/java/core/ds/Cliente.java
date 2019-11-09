@@ -8,23 +8,25 @@ import java.io.ObjectOutputStream;
 
 import static java.lang.Thread.sleep;
 
-/* Clase destinada a ejecutar las pruebas correspondientes al funcionamiento del proyecto. */
+/* Clase destinada a ejecutar las pruebas correspondientes
+al funcionamiento del proyecto. */
 public class Cliente {
     static final int SEGUNDOS = 2; // Duración de cada tick del reloj
 
-    public static void main(String[] args) throws InterruptedException{
-         /*INICIO PRUEBA 1*/
-        //test1();
+    public static void main(final String[] args) throws InterruptedException {
+        /*INICIO PRUEBA 1*/
+        test1();
         /*FIN PRUEBA 1*/
         //test2();
         /*FIN PRUEBA 2*/
 
-        comprobacionSerializable((Proyecto)cargarSerializable());
+        //comprobacionSerializable((Proyecto)cargarSerializable());
     }
 
-    public static void test1() throws InterruptedException {
+    private static void test1() throws InterruptedException {
         /*PRUEBA 1*/
-        Proyecto proy1, proy2;
+        Proyecto proy1;
+        Proyecto proy2;
         proy1 = new Proyecto("P1", null);
         Tarea tarea3 = new Tarea("T3", proy1);
         proy2 = new Proyecto("P2", proy1);
@@ -37,7 +39,7 @@ public class Cliente {
 
         proy2.anadir(tarea1);
         proy2.anadir(tarea2);
-        guardarSerializable(proy1);
+        //guardarSerializable(proy1);
 
         Reloj reloj = Reloj.getInstanciaReloj();
         reloj.comenzarPrintarArbol(proy1);
@@ -59,9 +61,10 @@ public class Cliente {
         Reloj.pararReloj();
     }
 
-    public static void test2() throws InterruptedException {
+    private static void test2() throws InterruptedException {
         //PRUEBA 2
-        Proyecto proy1, proy2;
+        Proyecto proy1;
+        Proyecto proy2;
         proy1 = new Proyecto("P1", null);
         Tarea tarea3 = new Tarea("T3", proy1);
         proy2 = new Proyecto("P2", proy1);
@@ -98,15 +101,17 @@ public class Cliente {
         Reloj.pararReloj();
     }
 
-    public static void comprobacionSerializable(Proyecto raiz) throws InterruptedException {
+    private static void comprobacionSerializable(final Proyecto raiz)
+            throws InterruptedException {
 
-        for(Actividad a: raiz.getActividades()){
-            System.out.println("Comprobación de la serialización de los hijos de la raíz");
-            System.out.println("Nombre: "+a.getNombre());
+        for (Actividad a: raiz.getActividades()) {
+            System.out.println("Comprobación de la serialización "
+                    + "de los hijos de la raíz");
+            System.out.println("Nombre: " + a.getNombre());
         }
     }
 
-    public static void guardarSerializable(Actividad actividad){
+    private static void guardarSerializable(final Actividad actividad) {
 
         try {
             ObjectOutputStream flujoSalida = new ObjectOutputStream(new FileOutputStream("C:/Users/danib/Desktop/Serializado.txt"));
@@ -115,20 +120,20 @@ public class Cliente {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//guardarSerializable(proy1)
+    } //guardarSerializable(proy1)
 
-    public static Actividad cargarSerializable() {
+    private static Actividad cargarSerializable() {
         //DESERIALIZAR
         Actividad serializado = null;
         try {
-            FileInputStream file = new FileInputStream("C:/Users/danib/DesktopSerializado.txt");
+            FileInputStream file
+                    = new FileInputStream("C:/Users/danib/DesktopSerializado.txt");
             ObjectInputStream in = new ObjectInputStream(file);
 
             serializado = (Actividad) in.readObject();
 
             in.close();
             file.close();
-
 
         } catch (Exception e) {
             e.printStackTrace();
