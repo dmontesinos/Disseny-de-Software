@@ -88,5 +88,7 @@ public abstract class  Actividad implements Serializable {
         }
         setHoraFinal(fecha);
     }
+    /*Implementación para el patrón visitor*/
+    protected abstract void accept(Visitor visitor);
 }
 

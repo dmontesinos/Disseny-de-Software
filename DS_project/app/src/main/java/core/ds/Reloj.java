@@ -2,6 +2,7 @@ package core.ds;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,6 +21,10 @@ public final class Reloj extends TimerTask {
     private Reloj.Notificador notificador = new Reloj.Notificador();
     private static Timer reloj = null;
     private Proyecto proyectoRaiz;
+
+
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
+
 
     private Reloj() { //Esto es una clase Bean
         //Daemon para que el thread corra de fondo
@@ -48,9 +53,21 @@ public final class Reloj extends TimerTask {
     //Encargado de notificar la nueva fecha y printar el árbol
     public void run() {
         notificador.informarNuevaFecha(new Date());
-        if (proyectoRaiz != null) {
-            proyectoRaiz.printar();
+
+        System.out.println("\nNom\t\t\tTemps inici\t\t\t\t"
+                + "Temps final\t\t\t\tDurada(hh:mm:ss)");
+        System.out.println("----+---------------------"
+                + "---+-------------------------+--"
+                + "------------------------");
+        System.out.print(proyectoRaiz.getNombre());
+        if (proyectoRaiz.getHoraInicio() != null && proyectoRaiz.getHoraFinal() != null) {
+            System.out.print("\t\t" + sdf.format(proyectoRaiz.getHoraInicio()) + "\t\t"
+                    + sdf.format(proyectoRaiz.getHoraFinal()));
+            System.out.print("\t\t\t" + proyectoRaiz.getDuracionTotal() + "\n");
+        } else {
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t00:00:00");
         }
+        proyectoRaiz.printar();
     }
 
     public void anadirObservador(final Intervalo intervalo) {

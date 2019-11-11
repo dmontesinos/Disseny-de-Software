@@ -40,18 +40,6 @@ public class Tarea extends Actividad  {
         this.setHoraFinal(intervalo.getHoraFinal());
         reloj.borrarObservador(intervalo);
     }
-    /* Función encargada de mostrar los objetos de la estructura
-    del árbol de tipo Tarea. */
-    public void printar() {
-        System.out.print(this.getNombre());
-        if (getHoraInicio() != null && getHoraFinal() != null) {
-            System.out.print("\t\t" + sdf.format(getHoraInicio())
-                    + "\t\t" + sdf.format(getHoraFinal()));
-            System.out.print("\t\t\t" + getDuracionTotal() + "\n");
-        } else {
-            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t00:00:00");
-        }
-    }
 
     /*Función recursiva encargada de calcular el tiempo total de la tarea.
     Para ello, coge todos los intérvalos pertenecientes al array de intérvalos
@@ -65,4 +53,10 @@ public class Tarea extends Actividad  {
         setDuracionTotal(total);
         return total;
     }
+
+    @Override
+    public void accept(final Visitor visitor) {
+        visitor.visit(this);
+    }
+
 }

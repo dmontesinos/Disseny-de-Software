@@ -7,12 +7,13 @@ import java.util.ArrayList;
 almacena el tiempo total de todos los objetos que le cuelgan.*/
 public class Proyecto extends Actividad {
     private ArrayList<Actividad> actividades;
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
+    private final Impresor impresor;
 
 
     public Proyecto(final String nombreRecibido, final Proyecto padreRecibido) {
         super(nombreRecibido, padreRecibido);
         actividades = new ArrayList<Actividad>();
+        impresor = Impresor.getInstance();
     }
 
 
@@ -24,27 +25,11 @@ public class Proyecto extends Actividad {
         return actividades;
     }
     /* Función encargada de mostrar los objetos de la estructura
-    del árbol de tipo proyecto. Además, como la raíz del árbol es
-    un proyecto, en caso de situarnos en dicha raíz, mostramos una
-    cabecera.*/
+    del árbol. Recorre el vector y utiliza el patrón Visitor
+    para ir imprimiendo por pantalla*/
     public void printar() {
-        if (getPadre() == null) {
-            System.out.println("\nNom\t\t\tTemps inici\t\t\t\t"
-                    + "Temps final\t\t\t\tDurada(hh:mm:ss)");
-            System.out.println("----+---------------------"
-                    + "---+-------------------------+--"
-                    + "------------------------");
-        }
-        System.out.print(this.getNombre());
-        if (getHoraInicio() != null && getHoraFinal() != null) {
-            System.out.print("\t\t" + sdf.format(getHoraInicio()) + "\t\t"
-                    + sdf.format(getHoraFinal()));
-            System.out.print("\t\t\t" + getDuracionTotal() + "\n");
-        } else {
-            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t00:00:00");
-        }
         for (Actividad a: actividades) {
-            a.printar();
+            a.accept(impresor);
         }
     }
 
@@ -59,5 +44,9 @@ public class Proyecto extends Actividad {
         }
         setDuracionTotal(total);
         return total;
+    }
+
+    public void accept(final Visitor visitor) {
+        visitor.visit(this);
     }
 }
