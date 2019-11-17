@@ -31,6 +31,10 @@ public abstract class  Actividad implements Serializable {
     public void printar() {
 
     } //Cada implementación está en su respectiva clase.
+    public void printarCabecera() {
+
+    }
+
 
     //Cada implementación estña en su clase.
     public abstract long getDuracionTotal();
@@ -90,5 +94,6 @@ public abstract class  Actividad implements Serializable {
     }
     /*Implementación para el patrón visitor*/
     protected abstract void accept(Visitor visitor);
+
 }
 

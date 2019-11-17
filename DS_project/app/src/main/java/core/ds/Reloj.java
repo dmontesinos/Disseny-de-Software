@@ -53,20 +53,7 @@ public final class Reloj extends TimerTask {
     //Encargado de notificar la nueva fecha y printar el árbol
     public void run() {
         notificador.informarNuevaFecha(new Date());
-
-        System.out.println("\nNom\t\t\tTemps inici\t\t\t\t"
-                + "Temps final\t\t\t\tDurada(hh:mm:ss)");
-        System.out.println("----+---------------------"
-                + "---+-------------------------+--"
-                + "------------------------");
-        System.out.print(proyectoRaiz.getNombre());
-        if (proyectoRaiz.getHoraInicio() != null && proyectoRaiz.getHoraFinal() != null) {
-            System.out.print("\t\t" + sdf.format(proyectoRaiz.getHoraInicio()) + "\t\t"
-                    + sdf.format(proyectoRaiz.getHoraFinal()));
-            System.out.print("\t\t\t" + proyectoRaiz.getDuracionTotal() + "\n");
-        } else {
-            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t00:00:00");
-        }
+        proyectoRaiz.printarCabecera();
         proyectoRaiz.printar();
     }
 
@@ -109,10 +96,3 @@ public final class Reloj extends TimerTask {
         }
     }
 }
-
-
-
-
-
-
-

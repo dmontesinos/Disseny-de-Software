@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Date;
 
 import static java.lang.Thread.sleep;
 
@@ -15,12 +16,16 @@ public class Cliente {
 
     public static void main(final String[] args) throws InterruptedException {
         /*INICIO PRUEBA 1*/
-        test1();
-        /*FIN PRUEBA 1*/
-        //test2();
-        /*FIN PRUEBA 2*/
+        //test1();
 
+        /*INICIO PRUEBA 2*/
+        //test2();
+
+        /*INICIO PRUEBA SERIALIZABLE*/
         //comprobacionSerializable((Proyecto)cargarSerializable());
+
+        informeSimpleTXT();
+
     }
 
     private static void test1() throws InterruptedException {
@@ -101,6 +106,54 @@ public class Cliente {
         Reloj.pararReloj();
     }
 
+    private static void informeSimpleTXT() throws InterruptedException {
+        Proyecto proy1;
+        Proyecto proy2;
+        proy1 = new Proyecto("P1", null);
+        Tarea tarea3 = new Tarea("T3", proy1);
+        proy2 = new Proyecto("P2", proy1);
+
+        proy1.anadir(tarea3);
+        proy1.anadir(proy2);
+
+        Tarea tarea1 = new Tarea("T1", proy2);
+        Tarea tarea2 = new Tarea("T2", proy2);
+
+        proy2.anadir(tarea1);
+        proy2.anadir(tarea2);
+
+        Reloj reloj = Reloj.getInstanciaReloj();
+        reloj.comenzarPrintarArbol(proy1);
+
+        tarea3.iniciarTarea();
+        sleep(4000);
+        tarea2.iniciarTarea();
+        sleep(2000);
+        tarea3.detenerTarea();
+        /*sleep(2000);
+        tarea1.iniciarTarea();
+        sleep(4000);
+        tarea1.detenerTarea();
+        sleep(2000);
+        tarea2.detenerTarea();
+        sleep(4000);
+        tarea3.iniciarTarea();
+        sleep(2000);
+        tarea3.detenerTarea();*/
+
+        Reloj.pararReloj();
+
+
+        Date fechaInicioInforme = null;
+        Date fechaFinalInforme = null;
+
+        Informe informeDeseado = new InformeBreve(fechaInicioInforme, fechaFinalInforme);
+        Formato formatoDeseado = new FormatoTextoPlano();
+
+        informeDeseado.escribirInforme(proy1, formatoDeseado);
+    }
+
+
     private static void comprobacionSerializable(final Proyecto raiz)
             throws InterruptedException {
 
@@ -127,7 +180,7 @@ public class Cliente {
         Actividad serializado = null;
         try {
             FileInputStream file
-                    = new FileInputStream("C:/Users/danib/DesktopSerializado.txt");
+                    = new FileInputStream("C:/Users/danib/Desktop/Serializado.txt");
             ObjectInputStream in = new ObjectInputStream(file);
 
             serializado = (Actividad) in.readObject();

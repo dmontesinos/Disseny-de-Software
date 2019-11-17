@@ -8,6 +8,7 @@ almacena el tiempo total de todos los objetos que le cuelgan.*/
 public class Proyecto extends Actividad {
     private ArrayList<Actividad> actividades;
     private final Impresor impresor;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
 
 
     public Proyecto(final String nombreRecibido, final Proyecto padreRecibido) {
@@ -33,6 +34,10 @@ public class Proyecto extends Actividad {
         }
     }
 
+    public void printarCabecera() {
+        this.acceptCabecera(impresor);
+    }
+
     /*Función recursiva encargada de calcular el tiempo total del proyecto.
     Para ello, coge las actividades que cuelgan del array de esta clase y
     suma recursivamente los tiempos de sus objetos.*/
@@ -48,5 +53,9 @@ public class Proyecto extends Actividad {
 
     public void accept(final Visitor visitor) {
         visitor.visit(this);
+    }
+
+    public void acceptCabecera(final Visitor visitor) {
+        visitor.visitCabecera(this);
     }
 }

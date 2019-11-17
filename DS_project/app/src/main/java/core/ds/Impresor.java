@@ -39,4 +39,20 @@ public class Impresor implements Visitor {
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t00:00:00");
         }
     }
+
+    public void visitCabecera(final Proyecto proyecto) {
+        System.out.println("\nNom\t\t\tTemps inici\t\t\t\t"
+                + "Temps final\t\t\t\tDurada(hh:mm:ss)");
+        System.out.println("----+---------------------"
+                + "---+-------------------------+--"
+                + "------------------------");
+        System.out.print(proyecto.getNombre());
+        if (proyecto.getHoraInicio() != null && proyecto.getHoraFinal() != null) {
+            System.out.print("\t\t" + sdf.format(proyecto.getHoraInicio()) + "\t\t"
+                    + sdf.format(proyecto.getHoraFinal()));
+            System.out.print("\t\t\t" + proyecto.getDuracionTotal() + "\n");
+        } else {
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t00:00:00");
+        }
+    }
 }

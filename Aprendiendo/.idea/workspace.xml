@@ -52,10 +52,23 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.PruebasFechas">
+  <component name="RunManager" selected="Application.MatrizBidimensional">
     <configuration name="Fechas" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Fechas" />
       <module name="Aprendiendo" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MatrizBidimensional" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="PruebasProyectoDS.MatrizBidimensional" />
+      <module name="Aprendiendo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="PruebasProyectoDS.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -80,19 +93,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Uso_Empleado" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="poo.Uso_Empleado" />
-      <module name="Aprendiendo" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="poo.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="uso_Coche" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="poo.uso_Coche" />
       <module name="Aprendiendo" />
@@ -108,11 +108,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MatrizBidimensional" />
         <item itemvalue="Application.PruebasFechas" />
         <item itemvalue="Application.Fechas" />
         <item itemvalue="Application.ObserverClass" />
         <item itemvalue="Application.uso_Coche" />
-        <item itemvalue="Application.Uso_Empleado" />
       </list>
     </recent_temporary>
   </component>
@@ -134,6 +134,9 @@
       <workItem from="1571335604177" duration="57000" />
       <workItem from="1571661557110" duration="1941000" />
       <workItem from="1571686491345" duration="24000" />
+      <workItem from="1573840263063" duration="11000" />
+      <workItem from="1573931065251" duration="4020000" />
+      <workItem from="1573950601301" duration="599000" />
     </task>
     <servers />
   </component>
