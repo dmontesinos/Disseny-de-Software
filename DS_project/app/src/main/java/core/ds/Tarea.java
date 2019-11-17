@@ -59,4 +59,28 @@ public class Tarea extends Actividad  {
         visitor.visit(this);
     }
 
+    public final int getDuracionTotal (final Date fechaInicioInformeRecibido, final Date fechaFinalInformeRecibido) {
+
+        int duracionTotalFranja = 0;
+
+        for (Intervalo intervalo: intervalos) {
+            if (((intervalo.getHoraInicio().compareTo(fechaInicioInformeRecibido)) <= 0) && (intervalo.getHoraFinal().compareTo(fechaFinalInformeRecibido)) >= 0) {
+                duracionTotalFranja += fechaFinalInformeRecibido.getTime() - fechaInicioInformeRecibido.getTime();
+            } else {
+                if ((intervalo.getHoraInicio().compareTo(fechaInicioInformeRecibido)) > 0 && (intervalo.getHoraFinal().compareTo(fechaFinalInformeRecibido)) < 0) {
+                    duracionTotalFranja += intervalo.getHoraFinal().getTime() - intervalo.getHoraInicio().getTime();
+                } else {
+                    if ((intervalo.getHoraInicio().compareTo(fechaFinalInformeRecibido)) < 0 && (intervalo.getHoraFinal().compareTo(fechaFinalInformeRecibido)) > 0) {
+                        duracionTotalFranja += fechaFinalInformeRecibido.getTime() - intervalo.getHoraInicio().getTime();
+                    } else {
+                        if ((intervalo.getHoraInicio().compareTo(fechaInicioInformeRecibido)) < 0 && (intervalo.getHoraFinal().compareTo(fechaInicioInformeRecibido)) > 0) {
+                            duracionTotalFranja += intervalo.getHoraFinal().getTime() - fechaInicioInformeRecibido.getTime();
+                        }
+                    }
+                }
+            }
+        }
+        return duracionTotalFranja;
+    }
+
 }

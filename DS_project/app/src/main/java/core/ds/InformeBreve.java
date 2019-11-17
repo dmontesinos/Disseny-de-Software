@@ -29,7 +29,6 @@ public class InformeBreve extends Informe {
                 elemento.accept(formatoRecibido);
             }
             pw.write(formatoRecibido.getContenido());
-            //pw.println(this.desiredFormat.getContent());
             System.out.println();
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,23 +51,23 @@ public class InformeBreve extends Informe {
 
         ElementoTabla tablaDatos = new ElementoTabla(4, 2);
 
-        tablaDatos.setValor(0, 1, "Fecha");
-        tablaDatos.setValor(1, 0, "Desde");
-        tablaDatos.setValor(2, 0, "Hasta");
-        tablaDatos.setValor(3, 0, "Fecha actual");
+        tablaDatos.setValor(0, 1, "\t\t\t\t\t\t\tFecha");
+        tablaDatos.setValor(1, 0, "Desde: ");
+        tablaDatos.setValor(2, 0, "Hasta: ");
+        tablaDatos.setValor(3, 0, "Fecha: ");
 
-        Date horaInicial = null;
-        Date horaFinal = null;
+        Date horaInicial = getFechaInicial(); //La fecha del informe (Franja)
+        Date horaFinal = getFechaFinal();
         Date horaActual = new Date();
 
 
         //POSIBLEMENTE ESTO ESTA MAL//
-        if(!actividadesRecibidas.isEmpty()) {
+        /*if(!actividadesRecibidas.isEmpty()) {
             horaInicial = actividadesRecibidas.get(0).getHoraInicio();
             horaFinal = actividadesRecibidas.get(0).getHoraFinal();
-        }
+        }*/
 
-        for (Actividad act: actividadesRecibidas) {
+        /*for (Actividad act: actividadesRecibidas) {
             //horaInicial despues act (horaInicio es mas viejo)
             //Date1(horaInicial) esta despues Date2(act)
             if(horaInicial.compareTo(act.getHoraInicio()) > 0) {
@@ -79,7 +78,7 @@ public class InformeBreve extends Informe {
             if(act.getHoraFinal().compareTo(horaFinal) > 0) {
                 horaFinal = act.getHoraFinal();
             }
-        }
+        }*/
 
         tablaDatos.setValor(1,1, sdf.format(horaInicial));
         tablaDatos.setValor(2,1, sdf.format(horaFinal));
@@ -91,38 +90,46 @@ public class InformeBreve extends Informe {
 
         ElementoTabla tablaProyectos = new ElementoTabla(1, 4);
 
-        tablaProyectos.setValor(0, 1, "Fecha inicio");
-        tablaProyectos.setValor(0, 2, "Fecha final");
-        tablaProyectos.setValor(0, 3, "Tiempo Total");
+        tablaProyectos.setValor(0, 1, "\t\t\t\t\t\tFecha inicio");
+        tablaProyectos.setValor(0, 2, "\t\t\tFecha final");
+        tablaProyectos.setValor(0, 3, "\t\t\t\tTiempo Total");
 
 
-        Date horaInicialProyecto = null;
-        Date horaFinalProyecto = null;
+        //Date horaInicialProyecto = null;
+        //Date horaFinalProyecto = null;
 
         if(!actividadesRecibidas.isEmpty()) {
-            horaInicialProyecto = actividadesRecibidas.get(0).getHoraInicio();
-            horaFinalProyecto = actividadesRecibidas.get(0).getHoraFinal();
-        }
+            /*horaInicialProyecto = actividadesRecibidas.get(0).getHoraInicio();
+            horaFinalProyecto = actividadesRecibidas.get(0).getHoraFinal();*/
 
-        for (Actividad act: actividadesRecibidas) {
-            //horaInicial despues act (horaInicio es mas viejo)
-            //Date1(horaInicial) esta despues Date2(act)
-            if(horaInicialProyecto.compareTo(act.getHoraInicio()) > 0) {
-                horaInicialProyecto = act.getHoraInicio();
+            for (Actividad actividad: actividadesRecibidas) {
+                if (actividad.getClass() == Proyecto.class) {
+                    /*if(horaInicialProyecto.compareTo(act.getHoraInicio()) > 0) {
+                        horaInicialProyecto = act.getHoraInicio();
+                    }
+                    //horaFinal antes act (horaFinal es más viejo)
+                    //Date1(horaFinal) esta despues Date2(act)
+                    if(act.getHoraFinal().compareTo(horaFinalProyecto) > 0) {
+                        horaFinalProyecto = act.getHoraFinal();
+                    }*/
+                    System.out.println(actividad.getNombre());
+                    System.out.println(actividad.getHoraInicio());
+                    System.out.println(actividad.getHoraFinal());
+
+                    ArrayList fila = new ArrayList();
+                    fila.add(actividad.getNombre());
+                    fila.add(actividad.getHoraInicio());
+                    fila.add(actividad.getHoraFinal());
+
+                    int duracionFranja = (int)actividad.getDuracionTotal(getFechaInicial(), getFechaFinal());
+
+                    fila.add(duracionFranja);
+
+                    tablaProyectos.anadirFila(fila);
+                }
+                //horaInicial despues act (horaInicio es mas viejo)
+                //Date1(horaInicial) esta despues Date2(act)
             }
-            //horaFinal antes act (horaFinal es más viejo)
-            //Date1(horaFinal) esta despues Date2(act)
-            if(act.getHoraFinal().compareTo(horaFinalProyecto) > 0) {
-                horaFinalProyecto = act.getHoraFinal();
-            }
-
-            ArrayList fila = new ArrayList();
-            fila.add(act.getNombre());
-            fila.add(horaInicialProyecto);
-            fila.add(horaFinalProyecto);
-            fila.add("LA RESTA!");
-
-            tablaProyectos.anadirFila(fila);
         }
 
         elementosInforme.add(tablaProyectos);
@@ -130,5 +137,4 @@ public class InformeBreve extends Informe {
 
         return elementosInforme;
     }
-
 }

@@ -11,23 +11,41 @@ public class FormatoTextoPlano extends Formato {
     }
 
     public void visit(ElementoSeparador separadorRecibido) {
-        //contenido += separadorRecibido.getElementoSeparador();
-        contenido += "---------------------------------\n";
+        if (separadorRecibido != null) {
+            contenido += "---------------------------------\n";
+        }
     }
 
     public void visit(ElementoTitulo tituloRecibido) {
-        contenido += tituloRecibido.getElementoTitulo();
+        if (tituloRecibido.getElementoTitulo() != null) {
+            contenido += tituloRecibido.getElementoTitulo();
+        }
     }
 
     public void visit(ElementoSubTitulo subtituloRecibido) {
-        contenido += subtituloRecibido.getElementoSubtitulo();
+        if (subtituloRecibido.getElementoSubtitulo() != null) {
+            contenido += subtituloRecibido.getElementoSubtitulo();
+        }
     }
 
     public void visit(ElementoTabla tablaRecibida) {
-        contenido += tablaRecibida.getElementoTabla();
+        int totalFilas = tablaRecibida.getnFilas();
+        int totalColumnas = tablaRecibida.getnColumnas();
+
+        for (int itFilas = 0; itFilas < totalFilas; itFilas++) {
+            for (int itColumna = 0; itColumna < totalColumnas; itColumna++) {
+                if (tablaRecibida.getPosicion(itFilas, itColumna) != null) {
+                    //contenido += "     ";
+                    contenido += tablaRecibida.getPosicion(itFilas, itColumna) + "\t\t\t\t";
+                }
+            }
+            contenido += "\n";
+        }
     }
 
     public void visit(ElementoParrafo parrafoRecibido) {
-        contenido += parrafoRecibido.getElementoParrafo();
+        if (parrafoRecibido.getElementoParrafo() != null) {
+            contenido += parrafoRecibido.getElementoParrafo();
+        }
     }
 }

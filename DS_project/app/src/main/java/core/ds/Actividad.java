@@ -36,8 +36,9 @@ public abstract class  Actividad implements Serializable {
     }
 
 
-    //Cada implementación estña en su clase.
+    //Cada implementación está en su clase.
     public abstract long getDuracionTotal();
+    public abstract int getDuracionTotal(final Date inicioFranja, final Date finalFranja);
 
     public void setDuracionTotal(final long valor) {
         duracionTotal = valor;

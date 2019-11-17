@@ -8,12 +8,12 @@ public class ElementoTitulo extends Elemento {
     }
     public ElementoTitulo(String tituloRecibido) {
         titulo = tituloRecibido;
-        titulo += "\r\n";
+        titulo += "\n";
     }
 
     public void setTitulo(String tituloRecibido) {
         titulo = tituloRecibido;
-        titulo += "\r\n";
+        titulo += "\n";
     }
 
     public String getElementoTitulo() {

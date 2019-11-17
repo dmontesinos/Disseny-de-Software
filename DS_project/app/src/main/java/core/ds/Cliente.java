@@ -5,7 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static java.lang.Thread.sleep;
 
@@ -107,20 +109,32 @@ public class Cliente {
     }
 
     private static void informeSimpleTXT() throws InterruptedException {
+        Proyecto root;
         Proyecto proy1;
         Proyecto proy2;
-        proy1 = new Proyecto("P1", null);
+        Proyecto proy3;
+
+        root = new Proyecto(".", null);
+        proy1 = new Proyecto("P1", root);
         Tarea tarea3 = new Tarea("T3", proy1);
         proy2 = new Proyecto("P2", proy1);
+        proy3 = new Proyecto("P3", proy1);
+
 
         proy1.anadir(tarea3);
         proy1.anadir(proy2);
+        proy1.anadir(proy3);
 
         Tarea tarea1 = new Tarea("T1", proy2);
         Tarea tarea2 = new Tarea("T2", proy2);
+        Tarea tarea4 = new Tarea("T4", proy3);
+        Tarea tarea5 = new Tarea("T5", proy3);
 
         proy2.anadir(tarea1);
         proy2.anadir(tarea2);
+        proy3.anadir(tarea3);
+        proy3.anadir(tarea4);
+        proy3.anadir(tarea5);
 
         Reloj reloj = Reloj.getInstanciaReloj();
         reloj.comenzarPrintarArbol(proy1);
@@ -130,6 +144,12 @@ public class Cliente {
         tarea2.iniciarTarea();
         sleep(2000);
         tarea3.detenerTarea();
+        sleep(2000);
+        tarea4.iniciarTarea();
+        tarea5.iniciarTarea();
+        sleep(2000);
+        tarea4.detenerTarea();
+        tarea5.detenerTarea();
         /*sleep(2000);
         tarea1.iniciarTarea();
         sleep(4000);
@@ -144,10 +164,17 @@ public class Cliente {
         Reloj.pararReloj();
 
 
-        Date fechaInicioInforme = null;
-        Date fechaFinalInforme = null;
+        //Date fechaInicioInforme = new GregorianCalendar(2019, 11, 15).getTime();
+        //Date fechaFinalInforme = new GregorianCalendar(2019, 11, 18).getTime();
+        Calendar fechaInicioInforme = Calendar.getInstance();
+        fechaInicioInforme.add(Calendar.SECOND,-3);
 
-        Informe informeDeseado = new InformeBreve(fechaInicioInforme, fechaFinalInforme);
+        Calendar fechaFinalInforme = Calendar.getInstance();
+        fechaFinalInforme.add(Calendar.SECOND,+1000);
+
+
+
+        Informe informeDeseado = new InformeBreve(fechaInicioInforme.getTime(), fechaFinalInforme.getTime());
         Formato formatoDeseado = new FormatoTextoPlano();
 
         informeDeseado.escribirInforme(proy1, formatoDeseado);

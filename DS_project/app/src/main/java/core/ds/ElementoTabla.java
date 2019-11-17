@@ -67,12 +67,11 @@ public class ElementoTabla extends Elemento {
         }
     }
 
-    public String getPosicion(final int fila, final int columna) {
-        return (String) ((ArrayList) getElementoTabla().get(fila-1)).get(columna-1);
+    public Object getPosicion(final int fila, final int columna) {
+        return ((ArrayList) getElementoTabla().get(fila)).get(columna);
     }
 
     public void setValor(int fila, int columna, String texto) {
-        //((ArrayList) getElementoTabla().get(fila-1)).set(columna-1,texto);
         ((ArrayList) getElementoTabla().get(fila)).set(columna,texto);
     }
 

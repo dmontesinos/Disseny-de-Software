@@ -8,7 +8,7 @@ public abstract class Informe {
     protected Date fechaInicial;
     protected Date fechaFinal;
     protected Formato formatoDeseado;
-    protected ArrayList<Elemento> elementosInforme2;
+    //protected ArrayList<Elemento> elementosInforme2;
 
 
     /*public Informe(Proyecto proyecto, Formato formato, Date fechaInicialRecibida, Date fechaFinalRecibida) {
@@ -23,4 +23,10 @@ public abstract class Informe {
     }
     public abstract ArrayList prepararInforme(final ArrayList<Actividad> actividadesRecibidas);
     public abstract void escribirInforme(Proyecto proyectoRecibido, Formato formatoRecibido);
+    public Date getFechaInicial() {
+        return fechaInicial;
+    }
+    public Date getFechaFinal() {
+        return fechaFinal;
+    }
 }

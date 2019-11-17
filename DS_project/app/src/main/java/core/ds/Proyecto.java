@@ -2,6 +2,7 @@ package core.ds;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /*Se encarga de almacenar más proyectos y tareas. También
 almacena el tiempo total de todos los objetos que le cuelgan.*/
@@ -49,6 +50,16 @@ public class Proyecto extends Actividad {
         }
         setDuracionTotal(total);
         return total;
+    }
+    public final int getDuracionTotal(Date fechaInicioInformeRecibido, Date fechaFinalInformeRecibido) {
+        int duracionTotalFranja = 0;
+
+        for (Actividad actividad: actividades) {
+            if (actividad.getClass() == Tarea.class) {
+                duracionTotalFranja = actividad.getDuracionTotal(fechaInicioInformeRecibido, fechaFinalInformeRecibido);
+            }
+        }
+        return duracionTotalFranja;
     }
 
     public void accept(final Visitor visitor) {
