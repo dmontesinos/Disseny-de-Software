@@ -1,7 +1,7 @@
 package core.ds;
 
 public class FormatoTextoPlano extends Formato {
-    private String contenido;
+    private String contenido = null;
     public FormatoTextoPlano() {
         super();
     }

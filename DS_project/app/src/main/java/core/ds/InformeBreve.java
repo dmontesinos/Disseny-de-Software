@@ -116,16 +116,21 @@ public class InformeBreve extends Informe {
                     System.out.println(actividad.getHoraInicio());
                     System.out.println(actividad.getHoraFinal());
 
-                    ArrayList fila = new ArrayList();
-                    fila.add(actividad.getNombre());
-                    fila.add(actividad.getHoraInicio());
-                    fila.add(actividad.getHoraFinal());
+
+
 
                     int duracionFranja = (int)actividad.getDuracionTotal(getFechaInicial(), getFechaFinal());
+                    if (duracionFranja > 1000 ) {
+                        ArrayList fila = new ArrayList();
+                        fila.add(actividad.getNombre());
+                        fila.add(actividad.getPadre().getHoraInicio());
+                        fila.add(actividad.getPadre().getHoraFinal());
 
-                    fila.add(duracionFranja);
+                        fila.add(duracionFranja);
 
-                    tablaProyectos.anadirFila(fila);
+                        tablaProyectos.anadirFila(fila);
+                    }
+
                 }
                 //horaInicial despues act (horaInicio es mas viejo)
                 //Date1(horaInicial) esta despues Date2(act)
