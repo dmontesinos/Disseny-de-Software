@@ -51,12 +51,14 @@ public class Proyecto extends Actividad {
         setDuracionTotal(total);
         return total;
     }
-    public final int getDuracionTotal(Date fechaInicioInformeRecibido, Date fechaFinalInformeRecibido) {
+    public final int getDuracionTotal(final Date fechaInicioInformeRecibido,
+                                      final Date fechaFinalInformeRecibido) {
         int duracionTotalFranja = 0;
 
         for (Actividad actividad: actividades) {
             if (actividad.getClass() == Tarea.class) {
-                duracionTotalFranja += actividad.getDuracionTotal(fechaInicioInformeRecibido, fechaFinalInformeRecibido);
+                duracionTotalFranja += actividad.getDuracionTotal(
+                        fechaInicioInformeRecibido, fechaFinalInformeRecibido);
             }
         }
         //return Math.round(duracionTotalFranja/1000);

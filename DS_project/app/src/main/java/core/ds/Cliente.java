@@ -115,7 +115,8 @@ public class Cliente {
         Reloj.pararReloj();
     }
 
-    private static void generarInforme(String selecInforme, String selecFormato) throws InterruptedException {
+    private static void generarInforme(final String selecInforme, final String selecFormato)
+            throws InterruptedException {
         Proyecto proy1;
         Proyecto proy2;
         Proyecto proy3;
@@ -187,13 +188,15 @@ public class Cliente {
 
         if (selecInforme.equals("1")) {
             if (selecFormato.equals("1")) {
-                Informe informeDeseado = new InformeBreve(fechaInicioInforme.getTime(), fechaFinalInforme.getTime());
+                Informe informeDeseado = new InformeBreve(fechaInicioInforme.getTime(),
+                        fechaFinalInforme.getTime());
                 Formato formatoDeseado = new FormatoTextoPlano();
                 informeDeseado.escribirInforme(proy1, formatoDeseado);
 
             } else {
                 if (selecFormato.equals("2")) {
-                    Informe informeDeseado = new InformeBreve(fechaInicioInforme.getTime(), fechaFinalInforme.getTime());
+                    Informe informeDeseado = new InformeBreve(fechaInicioInforme.getTime(),
+                            fechaFinalInforme.getTime());
                     Formato formatoDeseado = new FormatoHTML();
                     informeDeseado.escribirInforme(proy1, formatoDeseado);
                 }
@@ -201,32 +204,21 @@ public class Cliente {
         } else {
             if (selecInforme.equals("2")) {
                 if (selecFormato.equals("1")) {
-                    Informe informeDeseado = new InformeDetallado(fechaInicioInforme.getTime(), fechaFinalInforme.getTime());
+                    Informe informeDeseado = new InformeDetallado(fechaInicioInforme.getTime(),
+                            fechaFinalInforme.getTime());
                     Formato formatoDeseado = new FormatoTextoPlano();
                     informeDeseado.escribirInforme(proy1, formatoDeseado);
                 } else {
                     if (selecFormato.equals("2")) {
-                        Informe informeDeseado = new InformeDetallado(fechaInicioInforme.getTime(), fechaFinalInforme.getTime());
+                        Informe informeDeseado = new InformeDetallado(fechaInicioInforme.getTime(),
+                                fechaFinalInforme.getTime());
                         Formato formatoDeseado = new FormatoHTML();
                         informeDeseado.escribirInforme(proy1, formatoDeseado);
                     }
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
 
     private static void comprobacionSerializable(final Proyecto raiz)
             throws InterruptedException {
@@ -267,5 +259,4 @@ public class Cliente {
         }
         return serializado;
     }
-    //Proyecto proy1 = (Proyecto)cargarSerializable();
 }

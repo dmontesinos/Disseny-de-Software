@@ -5,27 +5,32 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+/*Esta clase pretende recoger la impresión y estructura de un informe breve.
+* El formato no se le da en esta clase. Es decir, solo se genera la
+* estructura y el volcado a un fichero local.*/
 public class InformeBreve extends Informe {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
 
-    /*public InformeBreve(Proyecto proyecto, Formato formato, Date fechaInicialRecibida, Date fechaFinalRecibida) {
-        super(proyecto, formato, fechaInicialRecibida, fechaFinalRecibida);
-    }*/
-
-    public InformeBreve(Date fechaInicialInforme, Date fechaFinalInforme) {
+    public InformeBreve(final Date fechaInicialInforme,
+                        final Date fechaFinalInforme) {
         super(fechaInicialInforme, fechaFinalInforme);
     }
-
-    public void escribirInforme(final Proyecto proyectoRecibido, final Formato formatoRecibido) { //Guardarlo en fichero
+    /*Esta función básicamente recoge los datos generados por la
+    * función "prepararInforme()" y los guarda en un fichero local.*/
+    public void escribirInforme(final Proyecto proyectoRecibido,
+                                final Formato formatoRecibido) {
         FileWriter file = null;
         PrintWriter pw = null;
         try {
             if (formatoRecibido.getClass() == FormatoTextoPlano.class) {
-                file = new FileWriter("C:/Users/danib/Desktop/ReporteBreve.txt");
+                file = new FileWriter(
+                        "C:/Users/danib/Desktop/ReporteBreve.txt"
+                );
             } else {
                 if (formatoRecibido.getClass() == FormatoHTML.class) {
-                    file = new FileWriter("C:/Users/danib/Desktop/ReporteBreve.html");
+                    file = new FileWriter(
+                            "C:/Users/danib/Desktop/ReporteBreve.html"
+                    );
                 }
             }
 
@@ -49,7 +54,14 @@ public class InformeBreve extends Informe {
             }
         }
     }
-    public ArrayList prepararInforme(final ArrayList<Actividad> actividadesRecibidas) {
+    /*Función cuyo objetivo es recibir una lista de actividades (generalmente
+    * el proyecto Root) y preparar toda la estructura para generar un informe
+    * breve. Este informe se va acumulando elemento a elemento en un array
+    * que posteriormente es retornado. El tratado de este array se realiza
+    * posteriormente para definir si será TXT o HTML.*/
+    public ArrayList prepararInforme(
+            final ArrayList<Actividad> actividadesRecibidas
+    ) {
         ArrayList<Elemento> elementosInforme = new ArrayList<>();
         elementosInforme.add(new ElementoSeparador());
         elementosInforme.add(new ElementoTitulo("Informe breve"));
@@ -67,41 +79,29 @@ public class InformeBreve extends Informe {
         Date horaFinal = getFechaFinal();
         Date horaActual = new Date();
 
-        tablaDatos.setValor(1,1, sdf.format(horaInicial));
-        tablaDatos.setValor(2,1, sdf.format(horaFinal));
+        tablaDatos.setValor(1, 1, sdf.format(horaInicial));
+        tablaDatos.setValor(2, 1, sdf.format(horaFinal));
         tablaDatos.setValor(3, 1, sdf.format(horaActual));
 
         elementosInforme.add(tablaDatos);
         elementosInforme.add(new ElementoSeparador());
-        elementosInforme.add(new ElementoSubTitulo("Proyectos de primer nivel"));
+        elementosInforme.add(new ElementoSubTitulo(
+                "Proyectos de primer nivel"
+        ));
 
         ElementoTabla tablaProyectos = new ElementoTabla(1, 4);
 
         tablaProyectos.setValor(0, 1, "\t\t\t\t\t\tFecha inicio");
-        tablaProyectos.setValor(0, 2, "\t\t\tFecha final");
-        tablaProyectos.setValor(0, 3, "\t\t\t\tTiempo Total");
+        tablaProyectos.setValor(0, 2, "\t\t\t\tFecha final");
+        tablaProyectos.setValor(0, 3, "\t\tTiempo Total");
 
-
-        //Date horaInicialProyecto = null;
-        //Date horaFinalProyecto = null;
-
-        if(!actividadesRecibidas.isEmpty()) {
-            /*horaInicialProyecto = actividadesRecibidas.get(0).getHoraInicio();
-            horaFinalProyecto = actividadesRecibidas.get(0).getHoraFinal();*/
-
+        if (!actividadesRecibidas.isEmpty()) {
             for (Actividad actividad: actividadesRecibidas) {
                 if (actividad.getClass() == Proyecto.class) {
-                    /*if(horaInicialProyecto.compareTo(act.getHoraInicio()) > 0) {
-                        horaInicialProyecto = act.getHoraInicio();
-                    }
-                    //horaFinal antes act (horaFinal es más viejo)
-                    //Date1(horaFinal) esta despues Date2(act)
-                    if(act.getHoraFinal().compareTo(horaFinalProyecto) > 0) {
-                        horaFinalProyecto = act.getHoraFinal();
-                    }*/
-
-                    int duracionFranja = (int)actividad.getDuracionTotal(getFechaInicial(), getFechaFinal());
-                    if (duracionFranja > 1000 ) {
+                    int duracionFranja = actividad.getDuracionTotal(
+                            getFechaInicial(), getFechaFinal()
+                    );
+                    if (duracionFranja > 1000) {
                         ArrayList fila = new ArrayList();
                         fila.add(actividad.getNombre());
                         fila.add(actividad.getPadre().getHoraInicio());
@@ -111,10 +111,7 @@ public class InformeBreve extends Informe {
 
                         tablaProyectos.anadirFila(fila);
                     }
-
                 }
-                //horaInicial despues act (horaInicio es mas viejo)
-                //Date1(horaInicial) esta despues Date2(act)
             }
         }
 

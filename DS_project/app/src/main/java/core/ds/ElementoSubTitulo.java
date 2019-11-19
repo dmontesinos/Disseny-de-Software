@@ -1,17 +1,17 @@
 package core.ds;
-
+/*Este elemento permite generar un subtitulo en los informes*/
 public class ElementoSubTitulo extends Elemento {
     private String subtitulo;
 
     public ElementoSubTitulo() {
         subtitulo = null;
     }
-    public ElementoSubTitulo(String subtituloRecibido) {
+    public ElementoSubTitulo(final String subtituloRecibido) {
         subtitulo = subtituloRecibido;
         subtitulo += "\r\n";
     }
 
-    public void setSubTitulo(String subtituloRecibido) {
+    public void setSubTitulo(final String subtituloRecibido) {
         subtitulo = subtituloRecibido;
         subtitulo += "\r\n";
     }
@@ -20,7 +20,7 @@ public class ElementoSubTitulo extends Elemento {
         return subtitulo;
     }
 
-    public void accept(Formato formatoRecibido) {
+    public void accept(final Formato formatoRecibido) {
         formatoRecibido.visit(this);
     }
 }

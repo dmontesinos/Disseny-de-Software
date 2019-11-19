@@ -1,17 +1,17 @@
 package core.ds;
-
+/*Genera elementos de tipo título para los informes*/
 public class ElementoTitulo extends Elemento {
     private String titulo;
 
     public ElementoTitulo() {
         titulo = null;
     }
-    public ElementoTitulo(String tituloRecibido) {
+    public ElementoTitulo(final String tituloRecibido) {
         titulo = tituloRecibido;
         titulo += "\n";
     }
 
-    public void setTitulo(String tituloRecibido) {
+    public void setTitulo(final String tituloRecibido) {
         titulo = tituloRecibido;
         titulo += "\n";
     }
@@ -20,7 +20,7 @@ public class ElementoTitulo extends Elemento {
         return titulo;
     }
 
-    public void accept(Formato formatoRecibido) {
+    public void accept(final Formato formatoRecibido) {
         formatoRecibido.visit(this);
     }
 }

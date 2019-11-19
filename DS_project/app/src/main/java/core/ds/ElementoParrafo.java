@@ -1,5 +1,5 @@
 package core.ds;
-
+/*Este elemento sirve para generar un párrafo dentro de los informes*/
 public class ElementoParrafo extends Elemento {
     private String parrafo;
 
@@ -11,7 +11,7 @@ public class ElementoParrafo extends Elemento {
         return parrafo;
     }
 
-    public void setElementoParrafo(String parrafoRecibido) {
+    public void setElementoParrafo(final String parrafoRecibido) {
         parrafo = parrafoRecibido;
     }
 }

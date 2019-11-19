@@ -2,7 +2,6 @@ package core.ds;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 /* Clase abstracta con métodos destinados a actualizar recursivamente
@@ -40,7 +39,7 @@ public abstract class  Actividad implements Serializable {
 
     //Cada implementación está en su clase.
     public abstract long getDuracionTotal();
-    public abstract int getDuracionTotal(final Date inicioFranja, final Date finalFranja);
+    public abstract int getDuracionTotal(Date inicioFranja, Date finalFranja);
 
     public void setDuracionTotal(final long valor) {
         duracionTotal = valor;
@@ -98,6 +97,7 @@ public abstract class  Actividad implements Serializable {
     /*Implementación para el patrón visitor*/
     protected abstract void accept(Visitor visitor);
 
+    /*Necesario para redefinirla en la herencia*/
     public ArrayList<Actividad> getActividades() {
         return null;
     }

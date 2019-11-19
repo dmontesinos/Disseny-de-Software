@@ -1,19 +1,19 @@
 package core.ds;
 
 import java.util.ArrayList;
-
+/*Permite generar elemento tabla y gestionarlo eficientemente
+* para la generación de los formularios.*/
 public class ElementoTabla extends Elemento {
     private int nFilas;
     private int nColumnas;
     private ArrayList tabla;
 
 
-
     public int getnFilas() {
         return nFilas;
     }
 
-    public void setnFilas(int nFilasRecibido) {
+    public void setnFilas(final int nFilasRecibido) {
         nFilas = nFilasRecibido;
     }
 
@@ -21,7 +21,7 @@ public class ElementoTabla extends Elemento {
         return nColumnas;
     }
 
-    public void setnColumnas(int nColumnasRecibido) {
+    public void setnColumnas(final int nColumnasRecibido) {
         nColumnas = nColumnasRecibido;
     }
 
@@ -30,10 +30,12 @@ public class ElementoTabla extends Elemento {
         return tabla;
     }
 
-    public void setElementoTabla(ArrayList<Elemento> tablaRecibida) {
+    public void setElementoTabla(final ArrayList<Elemento> tablaRecibida) {
         tabla = tablaRecibida;
     }
-
+    /*Constructor con toda la estructura básica para una tabla por defecto.
+    * Necesita de los parámetros de número de filas y columnas para crearlas
+    * correctamente. Se trata de un Array bidimensional.*/
     public ElementoTabla(final int filas, final int columnas) {
         setnFilas(filas);
         setnColumnas(columnas);
@@ -56,9 +58,10 @@ public class ElementoTabla extends Elemento {
             fila.add(null);
         }
         getElementoTabla().add(fila);
-        setnFilas(getnFilas()+1);
+        setnFilas(getnFilas() + 1);
     }
-
+    /*Permite añadir una nueva fila a la tabla anteriormente creada
+    * con el contenido que se le envíe por parámetro.*/
     public void anadirFila(final ArrayList listaRecibida) {
         getElementoTabla().add(listaRecibida);
         setnFilas(getnFilas() + 1);
@@ -66,17 +69,17 @@ public class ElementoTabla extends Elemento {
             setnColumnas(listaRecibida.size());
         }
     }
-
+    /*Devuelve el contenido de una posición concreta de la tabla
+    solo indicando la fila y columna que se requiere.
+     */
     public Object getPosicion(final int fila, final int columna) {
         return ((ArrayList) getElementoTabla().get(fila)).get(columna);
     }
-
-    public void setValor(int fila, int columna, String texto) {
-        ((ArrayList) getElementoTabla().get(fila)).set(columna,texto);
-    }
-
-    public void imprimir() {
-        System.out.println(this.getElementoTabla());
+    /*Setea un valor pasado por parámetro en una posición concreta
+    * de la matríz bidimensional.*/
+    public void setValor(final int fila,
+                         final int columna, final String texto) {
+        ((ArrayList) getElementoTabla().get(fila)).set(columna, texto);
     }
 
     public void accept(final Formato formatoRecibido) {

@@ -1,7 +1,7 @@
 package core.ds;
-
-import java.util.ArrayList;
-
+/*Mediante esta clase podemos realizar los visit correspondientes
+* para cada formato y tipo de elemento y así poder aplicar el pa-
+* trón de diseño Visitor.*/
 public abstract class Formato implements VisitorElementos {
     public abstract void visit(ElementoSeparador separador);
     public abstract void visit(ElementoTitulo titulo);

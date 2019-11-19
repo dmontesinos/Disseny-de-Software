@@ -4,20 +4,28 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
-
+/*Esta clase pretende recoger la impresión y estructura de un informe
+ * detallado. El formato no se le da en esta clase. Es decir, solo
+ * se genera la estructura y el volcado a un fichero local.*/
 public class InformeDetallado extends Informe {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
 
 
-    public InformeDetallado(Date fechaInicialInforme, Date fechaFinalInforme) {
+    public InformeDetallado(final Date fechaInicialInforme,
+                            final Date fechaFinalInforme) {
         super(fechaInicialInforme, fechaFinalInforme);
     }
 
-
-    public ArrayList<Actividad> getActividades(final ArrayList<Actividad> listaActividades) {
+    /*Se necesita recorrer toda la estructura en forma de árbol y
+    * conseguir una lista con todas las tareas que hay. Esta función
+    * recorre toda la estructura y busca todos los objetos que sean
+    * de la clase Tarea, para posteriormente retornarlos. Es una función
+    * recursiva y, por tanto, se apoya en otra función llamada
+    * getActividadesRecursivo().*/
+    public ArrayList<Actividad> getActividades(
+            final ArrayList<Actividad> listaActividades) {
         ArrayList<Actividad> rActividades = new ArrayList<>();
         Iterator<Actividad> iteradorActividades = listaActividades.iterator();
         Actividad actividad;
@@ -27,13 +35,18 @@ public class InformeDetallado extends Informe {
             if (actividad.getClass() == Tarea.class) {
                 rActividades.add(actividad);
             } else {
-                rActividades = getActividadesRecursivo(actividad.getActividades().iterator(), rActividades);
+                rActividades = getActividadesRecursivo(
+                        actividad.getActividades().iterator(), rActividades);
             }
         }
         return rActividades;
     }
-
-    public ArrayList<Actividad> getActividadesRecursivo(final Iterator<Actividad> listaActividades, ArrayList<Actividad> activitatsResultat) {
+    /*Esta función complementa a la otra para poder realizar la búsqueda
+    * de todas las actividades de tipo Tarea y retornarlas en forma de
+    * Array.*/
+    public ArrayList<Actividad> getActividadesRecursivo(
+            final Iterator<Actividad> listaActividades,
+            ArrayList<Actividad> activitatsResultat) {
         Iterator<Actividad> iteradorActividades = listaActividades;
         Actividad actividad;
         while (iteradorActividades.hasNext()) {
@@ -42,21 +55,29 @@ public class InformeDetallado extends Informe {
                 activitatsResultat.add(actividad);
             } else {
                 activitatsResultat = getActividadesRecursivo(
-                        actividad.getActividades().iterator(), activitatsResultat);
+                        actividad.getActividades().iterator(),
+                        activitatsResultat);
             }
         }
         return activitatsResultat;
     }
-
-    public void escribirInforme(final Proyecto proyectoRecibido, final Formato formatoRecibido) { //Guardarlo en fichero
+    /*Imprime el informe preparado por la función prepararInforme()
+    * llamada dentro. Utiliza la misma metodología que en la clase
+    * InformeBreve.*/
+    public void escribirInforme(final Proyecto proyectoRecibido,
+                                final Formato formatoRecibido) {
         FileWriter file = null;
         PrintWriter pw = null;
         try {
             if (formatoRecibido.getClass() == FormatoTextoPlano.class) {
-                file = new FileWriter("C:/Users/danib/Desktop/ReporteDetallado.txt");
+                file = new FileWriter(
+                        "C:/Users/danib/Desktop/ReporteDetallado.txt"
+                );
             } else {
                 if (formatoRecibido.getClass() == FormatoHTML.class) {
-                    file = new FileWriter("C:/Users/danib/Desktop/ReporteDetallado.html");
+                    file = new FileWriter(
+                            "C:/Users/danib/Desktop/ReporteDetallado.html"
+                    );
                 }
             }
             pw = new PrintWriter(file);
@@ -79,7 +100,11 @@ public class InformeDetallado extends Informe {
             }
         }
     }
-    public ArrayList prepararInforme(final ArrayList<Actividad> actividadesRecibidas) {
+    /*Prepara el informe como en el caso breve, pero en este caso con
+    * información adicional. Se almacenan además del informe breve,
+    * los subproyectos, las tareas y los intérvalos de la estructura.*/
+    public ArrayList prepararInforme(
+            final ArrayList<Actividad> actividadesRecibidas) {
         ArrayList<Elemento> elementosInforme = new ArrayList<>();
         elementosInforme.add(new ElementoSeparador());
         elementosInforme.add(new ElementoTitulo("Informe detallado"));
@@ -93,17 +118,16 @@ public class InformeDetallado extends Informe {
         tablaDatos.setValor(2, 0, "Hasta: ");
         tablaDatos.setValor(3, 0, "Fecha: ");
 
-        Date horaInicial = getFechaInicial(); //La fecha del informe (Franja)
-        Date horaFinal = getFechaFinal();
         Date horaActual = new Date();
 
-        tablaDatos.setValor(1,1, sdf.format(horaInicial));
-        tablaDatos.setValor(2,1, sdf.format(horaFinal));
+        tablaDatos.setValor(1, 1, sdf.format(getFechaInicial()));
+        tablaDatos.setValor(2, 1, sdf.format(getFechaFinal()));
         tablaDatos.setValor(3, 1, sdf.format(horaActual));
 
         elementosInforme.add(tablaDatos);
         elementosInforme.add(new ElementoSeparador());
-        elementosInforme.add(new ElementoSubTitulo("Proyectos de primer nivel"));
+        elementosInforme.add(new ElementoSubTitulo(
+                "Proyectos de primer nivel"));
 
         ElementoTabla tablaProyectos = new ElementoTabla(1, 4);
 
@@ -111,29 +135,13 @@ public class InformeDetallado extends Informe {
         tablaProyectos.setValor(0, 2, "\t\t\t\tFecha final");
         tablaProyectos.setValor(0, 3, "\t\tTiempo Total");
 
-
-        //Date horaInicialProyecto = null;
-        //Date horaFinalProyecto = null;
-
-        if(!actividadesRecibidas.isEmpty()) {
-            /*horaInicialProyecto = actividadesRecibidas.get(0).getHoraInicio();
-            horaFinalProyecto = actividadesRecibidas.get(0).getHoraFinal();*/
+        if (!actividadesRecibidas.isEmpty()) {
 
             for (Actividad actividad: actividadesRecibidas) {
                 if (actividad.getClass() == Proyecto.class) {
-                    /*if(horaInicialProyecto.compareTo(act.getHoraInicio()) > 0) {
-                        horaInicialProyecto = act.getHoraInicio();
-                    }
-                    //horaFinal antes act (horaFinal es más viejo)
-                    //Date1(horaFinal) esta despues Date2(act)
-                    if(act.getHoraFinal().compareTo(horaFinalProyecto) > 0) {
-                        horaFinalProyecto = act.getHoraFinal();
-                    }*/
-
-
-
-                    int duracionFranja = (int)actividad.getDuracionTotal(getFechaInicial(), getFechaFinal());
-                    if (duracionFranja > 1000 ) {
+                    int duracionFranja = actividad.getDuracionTotal(
+                            getFechaInicial(), getFechaFinal());
+                    if (duracionFranja > 1000) {
                         ArrayList fila = new ArrayList();
                         fila.add(actividad.getNombre());
                         fila.add(actividad.getPadre().getHoraInicio());
@@ -143,10 +151,7 @@ public class InformeDetallado extends Informe {
 
                         tablaProyectos.anadirFila(fila);
                     }
-
                 }
-                //horaInicial despues act (horaInicio es mas viejo)
-                //Date1(horaInicial) esta despues Date2(act)
             }
         }
 
@@ -154,8 +159,10 @@ public class InformeDetallado extends Informe {
         elementosInforme.add(new ElementoSeparador());
 
         elementosInforme.add(new ElementoSubTitulo("Subproyectos"));
-        //elementosInforme.add(new ElementoParrafo("Se incluyen en la siguiente tabla "
-        //        + "solo los subproyectos que tengan alguna tarea con algun intervalo dentro del periodo.\n"));
+        elementosInforme.add(new ElementoParrafo(
+                "Se incluyen en la siguiente tabla "
+                + "solo los subproyectos que tengan alguna tarea con "
+                        + "algun intervalo dentro del periodo.\n"));
 
         ElementoTabla tablaDatosSubproyecto = new ElementoTabla(1, 5);
 
@@ -164,21 +171,23 @@ public class InformeDetallado extends Informe {
         tablaDatosSubproyecto.setValor(0, 3, "\t\t\t\tFecha final");
         tablaDatosSubproyecto.setValor(0, 4, "\t\tTiempo total");
 
-        if(!actividadesRecibidas.isEmpty()) {
+        if (!actividadesRecibidas.isEmpty()) {
             for (Actividad actividad: actividadesRecibidas) {
                 if (actividad.getClass() == Proyecto.class) {
 
-                    Proyecto proy = (Proyecto)actividad;
+                    Proyecto proy = (Proyecto) actividad;
                     for (Actividad proyecto: proy.getActividades()) {
                         if (proyecto.getClass() == Proyecto.class) {
-                            if (proyecto.getDuracionTotal(getFechaInicial(), getFechaFinal()) > 1000) {
+                            if (proyecto.getDuracionTotal(
+                                    getFechaInicial(), getFechaFinal()) > 1000) {
                                 ArrayList fila = new ArrayList();
                                 fila.add(proyecto.getNombre());
                                 fila.add(proyecto.getPadre().getNombre());
                                 fila.add(proyecto.getHoraInicio());
                                 fila.add(proyecto.getHoraFinal());
 
-                                fila.add(proyecto.getDuracionTotal(getFechaInicial(), getFechaFinal()));
+                                fila.add(proyecto.getDuracionTotal(
+                                        getFechaInicial(), getFechaFinal()));
 
                                 tablaDatosSubproyecto.anadirFila(fila);
                             }
@@ -190,10 +199,9 @@ public class InformeDetallado extends Informe {
         elementosInforme.add(tablaDatosSubproyecto);
         elementosInforme.add(new ElementoSeparador());
         elementosInforme.add(new ElementoSubTitulo("Tareas"));
-        elementosInforme.add(new ElementoParrafo( "Se incluyen en la siguiente "
-                + "tabla la duración de todas las tareas y el proyecto al cual pertenecen"));
-
-
+        elementosInforme.add(new ElementoParrafo("Se incluyen en la siguiente "
+                + "tabla la duración de todas las tareas y el proyecto "
+                + "al cual pertenecen"));
 
 
         ElementoTabla tablaDatosTareas = new ElementoTabla(1, 5);
@@ -203,18 +211,21 @@ public class InformeDetallado extends Informe {
         tablaDatosTareas.setValor(0, 3, "\t\t\t\tFecha final");
         tablaDatosTareas.setValor(0, 4, "\t\tTiempo total");
 
-        if(!actividadesRecibidas.isEmpty()) {
-            ArrayList todasLasActividades = getActividades(actividadesRecibidas);
+        if (!actividadesRecibidas.isEmpty()) {
+            ArrayList todasLasActividades =
+                    getActividades(actividadesRecibidas);
 
             for (Object t: todasLasActividades) {
                 Tarea tarea = (Tarea) t;
-                if (tarea.getDuracionTotal(getFechaInicial(), getFechaFinal()) > 1000) {
+                if (tarea.getDuracionTotal(getFechaInicial(),
+                        getFechaFinal()) > 1000) {
                     ArrayList fila = new ArrayList();
                     fila.add(tarea.getNombre());
                     fila.add(tarea.getPadre().getNombre());
                     fila.add(tarea.getHoraInicio());
                     fila.add(tarea.getHoraFinal());
-                    fila.add(tarea.getDuracionTotal(getFechaInicial(), getFechaFinal()));
+                    fila.add(tarea.getDuracionTotal(getFechaInicial(),
+                            getFechaFinal()));
 
                     tablaDatosTareas.anadirFila(fila);
                 }
@@ -223,9 +234,12 @@ public class InformeDetallado extends Informe {
         elementosInforme.add(tablaDatosTareas);
         elementosInforme.add(new ElementoSeparador());
         elementosInforme.add(new ElementoSubTitulo("Intérvalos"));
-        elementosInforme.add(new ElementoParrafo("Se incluyen en la siguiente tabla "
-                + "el tiempo de inicio, final y durada de todos los intervalos entre la fecha inicial"
-                + "y final especificadas, y su tarea y proyecto al cual pertenecen"));
+        elementosInforme.add(new ElementoParrafo(
+                "Se incluyen en la siguiente tabla "
+                + "el tiempo de inicio, final y durada de todos los "
+                        + "intervalos entre la fecha inicial"
+                + "y final especificadas, y su tarea y proyecto al "
+                        + "cual pertenecen"));
 
         ElementoTabla tablaDatosIntervalos = new ElementoTabla(1, 6);
         tablaDatosIntervalos.setValor(0, 0, "Tarea");
@@ -235,24 +249,27 @@ public class InformeDetallado extends Informe {
         tablaDatosIntervalos.setValor(0, 4, "\t\t\t\tFecha final");
         tablaDatosIntervalos.setValor(0, 5, "\t\tTiempo total");
 
-        if(!actividadesRecibidas.isEmpty()) {
-            ArrayList todasLasActividades = getActividades(actividadesRecibidas);
+        if (!actividadesRecibidas.isEmpty()) {
+            ArrayList todasLasActividades =
+                    getActividades(actividadesRecibidas);
 
             for (Object t: todasLasActividades) {
                 int contador = 1;
                 Tarea tarea = (Tarea) t;
-                if (tarea.getDuracionTotal(getFechaInicial(), getFechaFinal()) > 1000) {
+                if (tarea.getDuracionTotal(getFechaInicial(),
+                        getFechaFinal()) > 1000) {
                     for (Object intervalo: tarea.getIntervalos()) {
                         Intervalo inter = (Intervalo) intervalo;
 
                         ArrayList fila = new ArrayList();
                         fila.add(inter.getTareaPadre().getNombre());
-                        fila.add("\t" + inter.getTareaPadre().getPadre().getNombre());
+                        fila.add("\t"
+                                + inter.getTareaPadre().getPadre().getNombre());
                         fila.add("\t\t" + contador);
                         contador++;
                         fila.add(inter.getHoraInicio());
                         fila.add(inter.getHoraFinal());
-                        fila.add(inter.getDuracionTotal()*1000);
+                        fila.add(inter.getDuracionTotal() * 1000);
 
                         tablaDatosIntervalos.anadirFila(fila);
                     }
