@@ -82,5 +82,8 @@ public class Tarea extends Actividad  {
         }
         return duracionTotalFranja;
     }
+    public final LinkedList getIntervalos() {
+        return intervalos;
+    }
 
 }

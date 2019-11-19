@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
 
@@ -26,7 +27,13 @@ public class Cliente {
         /*INICIO PRUEBA SERIALIZABLE*/
         //comprobacionSerializable((Proyecto)cargarSerializable());
 
-        informeSimpleTXT();
+        Scanner objeto = new Scanner(System.in);
+        System.out.println("Introduce que clase de informe quieres: [1]Breve [2]Detallado");
+        String selecInforme = objeto.nextLine();
+        System.out.println("En que formato lo deseas? [1]TXT [2]HTML");
+        String selecFormato = objeto.nextLine();
+
+        generarInforme(selecInforme, selecFormato);
 
     }
 
@@ -108,7 +115,7 @@ public class Cliente {
         Reloj.pararReloj();
     }
 
-    private static void informeSimpleTXT() throws InterruptedException {
+    private static void generarInforme(String selecInforme, String selecFormato) throws InterruptedException {
         Proyecto proy1;
         Proyecto proy2;
         Proyecto proy3;
@@ -127,8 +134,21 @@ public class Cliente {
         Tarea tarea2 = new Tarea("T2", proy2);
         Tarea tarea4 = new Tarea("T4", proy3);
 
+        Proyecto proy4 = new Proyecto("P4", proy2);
+
+        proy2.anadir(proy4);
         proy2.anadir(tarea1);
         proy2.anadir(tarea2);
+
+        Tarea tarea5 = new Tarea("T5", proy4);
+
+        Proyecto proy12 = new Proyecto("P12", proy3);
+        Tarea tarea12 = new Tarea("T12", proy12);
+
+        proy12.anadir(tarea12);
+        proy3.anadir(proy12);
+
+        proy4.anadir(tarea5);
         proy3.anadir(tarea4);
         //guardarSerializable(proy1);
 
@@ -137,11 +157,15 @@ public class Cliente {
 
 
         tarea3.iniciarTarea();
+        tarea12.iniciarTarea();
         sleep(3000);
+        tarea12.detenerTarea();
         tarea3.detenerTarea();
 
 
+        tarea5.iniciarTarea();
         sleep(7000);
+        tarea5.detenerTarea();
         tarea2.iniciarTarea();
         sleep(10000);
         tarea2.detenerTarea();
@@ -161,92 +185,46 @@ public class Cliente {
         fechaFinalInforme.add(Calendar.SECOND,+1000);
 
 
-        Informe informeDeseado = new InformeBreve(fechaInicioInforme.getTime(), fechaFinalInforme.getTime());
-        Formato formatoDeseado = new FormatoTextoPlano();
+        if (selecInforme.equals("1")) {
+            if (selecFormato.equals("1")) {
+                Informe informeDeseado = new InformeBreve(fechaInicioInforme.getTime(), fechaFinalInforme.getTime());
+                Formato formatoDeseado = new FormatoTextoPlano();
+                informeDeseado.escribirInforme(proy1, formatoDeseado);
 
-        informeDeseado.escribirInforme(proy1, formatoDeseado);
-
-
-
-
-
-
-
-        /*Proyecto root;
-        Proyecto proy1;
-        Proyecto proy2;
-        Proyecto proy3;
-
-
-        root = new Proyecto(".", null);
-        proy1 = new Proyecto("P1", root);
-        Tarea tarea3 = new Tarea("T3", proy1);
-        proy2 = new Proyecto("P2", proy1);
-        proy3 = new Proyecto("P3", proy1);
-
-
-        proy1.anadir(tarea3);
-        proy1.anadir(proy2);
-        proy1.anadir(proy3);
-
-        Tarea tarea1 = new Tarea("T1", proy2);
-        Tarea tarea2 = new Tarea("T2", proy2);
-        Tarea tarea4 = new Tarea("T4", proy3);
-        Tarea tarea5 = new Tarea("T5", proy3);
-        Tarea tarea6 = new Tarea("T6", proy2);
-
-        proy2.anadir(tarea1);
-        proy2.anadir(tarea2);
-        proy3.anadir(tarea3);
-        proy3.anadir(tarea4);
-        proy3.anadir(tarea5);
-        proy2.anadir(tarea6);
-
-        Reloj reloj = Reloj.getInstanciaReloj();
-        reloj.comenzarPrintarArbol(proy1);
-
-        tarea3.iniciarTarea();
-        sleep(4000);
-        tarea2.iniciarTarea();
-        sleep(2000);
-        tarea3.detenerTarea();
-        sleep(2000);
-        tarea4.iniciarTarea();
-        tarea5.iniciarTarea();
-        sleep(2000);
-        tarea4.detenerTarea();
-        tarea5.detenerTarea();
-        tarea6.iniciarTarea();
-        sleep(2000);
-        tarea6.detenerTarea();
-        /*sleep(2000);
-        tarea1.iniciarTarea();
-        sleep(4000);
-        tarea1.detenerTarea();
-        sleep(2000);
-        tarea2.detenerTarea();
-        sleep(4000);
-        tarea3.iniciarTarea();
-        sleep(2000);
-        tarea3.detenerTarea();
-
-        Reloj.pararReloj();*/
-
-
-        //Date fechaInicioInforme = new GregorianCalendar(2019, 11, 15).getTime();
-        //Date fechaFinalInforme = new GregorianCalendar(2019, 11, 18).getTime();
-        /*Calendar fechaInicioInforme = Calendar.getInstance();
-        fechaInicioInforme.add(Calendar.SECOND,-1000);
-
-        Calendar fechaFinalInforme = Calendar.getInstance();
-        fechaFinalInforme.add(Calendar.SECOND,+1000);
+            } else {
+                if (selecFormato.equals("2")) {
+                    Informe informeDeseado = new InformeBreve(fechaInicioInforme.getTime(), fechaFinalInforme.getTime());
+                    Formato formatoDeseado = new FormatoHTML();
+                    informeDeseado.escribirInforme(proy1, formatoDeseado);
+                }
+            }
+        } else {
+            if (selecInforme.equals("2")) {
+                if (selecFormato.equals("1")) {
+                    Informe informeDeseado = new InformeDetallado(fechaInicioInforme.getTime(), fechaFinalInforme.getTime());
+                    Formato formatoDeseado = new FormatoTextoPlano();
+                    informeDeseado.escribirInforme(proy1, formatoDeseado);
+                } else {
+                    if (selecFormato.equals("2")) {
+                        Informe informeDeseado = new InformeDetallado(fechaInicioInforme.getTime(), fechaFinalInforme.getTime());
+                        Formato formatoDeseado = new FormatoHTML();
+                        informeDeseado.escribirInforme(proy1, formatoDeseado);
+                    }
+                }
+            }
+        }
 
 
 
-        Informe informeDeseado = new InformeBreve(fechaInicioInforme.getTime(), fechaFinalInforme.getTime());
-        Formato formatoDeseado = new FormatoTextoPlano();
 
-        informeDeseado.escribirInforme(proy1, formatoDeseado);*/
+
+
+
+
+
+
+
+
     }
 
 

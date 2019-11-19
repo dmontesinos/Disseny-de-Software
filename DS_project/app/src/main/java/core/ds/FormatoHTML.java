@@ -56,7 +56,8 @@ public class FormatoHTML extends Formato {
                     //contenido += "     ";
                     //tablaHTML.with(tr(td((String)tablaRecibida.getPosicion(itFilas, itColumna))));
                     if (tablaRecibida.getPosicion(itFilas, itColumna).getClass() == Date.class ||
-                            tablaRecibida.getPosicion(itFilas, itColumna).getClass() == Integer.class) {
+                            tablaRecibida.getPosicion(itFilas, itColumna).getClass() == Integer.class
+                            || tablaRecibida.getPosicion(itFilas, itColumna).getClass() == Long.class) {
                         String cadena = String.valueOf(tablaRecibida.getPosicion(itFilas, itColumna));
                         tablaHTML.with(td(cadena));
                     } else {

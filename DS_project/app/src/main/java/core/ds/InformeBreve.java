@@ -21,7 +21,14 @@ public class InformeBreve extends Informe {
         FileWriter file = null;
         PrintWriter pw = null;
         try {
-            file = new FileWriter("C:/Users/danib/Desktop/report.txt");
+            if (formatoRecibido.getClass() == FormatoTextoPlano.class) {
+                file = new FileWriter("C:/Users/danib/Desktop/ReporteBreve.txt");
+            } else {
+                if (formatoRecibido.getClass() == FormatoHTML.class) {
+                    file = new FileWriter("C:/Users/danib/Desktop/ReporteBreve.html");
+                }
+            }
+
             pw = new PrintWriter(file);
             ArrayList<Elemento> elementos = new ArrayList<>();
             elementos = prepararInforme(proyectoRecibido.getActividades());
@@ -60,26 +67,6 @@ public class InformeBreve extends Informe {
         Date horaFinal = getFechaFinal();
         Date horaActual = new Date();
 
-
-        //POSIBLEMENTE ESTO ESTA MAL//
-        /*if(!actividadesRecibidas.isEmpty()) {
-            horaInicial = actividadesRecibidas.get(0).getHoraInicio();
-            horaFinal = actividadesRecibidas.get(0).getHoraFinal();
-        }*/
-
-        /*for (Actividad act: actividadesRecibidas) {
-            //horaInicial despues act (horaInicio es mas viejo)
-            //Date1(horaInicial) esta despues Date2(act)
-            if(horaInicial.compareTo(act.getHoraInicio()) > 0) {
-                horaInicial = act.getHoraInicio();
-            }
-            //horaFinal antes act (horaFinal es más viejo)
-            //Date1(horaFinal) esta despues Date2(act)
-            if(act.getHoraFinal().compareTo(horaFinal) > 0) {
-                horaFinal = act.getHoraFinal();
-            }
-        }*/
-
         tablaDatos.setValor(1,1, sdf.format(horaInicial));
         tablaDatos.setValor(2,1, sdf.format(horaFinal));
         tablaDatos.setValor(3, 1, sdf.format(horaActual));
@@ -112,12 +99,6 @@ public class InformeBreve extends Informe {
                     if(act.getHoraFinal().compareTo(horaFinalProyecto) > 0) {
                         horaFinalProyecto = act.getHoraFinal();
                     }*/
-                    System.out.println(actividad.getNombre());
-                    System.out.println(actividad.getHoraInicio());
-                    System.out.println(actividad.getHoraFinal());
-
-
-
 
                     int duracionFranja = (int)actividad.getDuracionTotal(getFechaInicial(), getFechaFinal());
                     if (duracionFranja > 1000 ) {

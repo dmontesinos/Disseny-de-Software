@@ -1,15 +1,17 @@
 package core.ds;
 
-public class ElementoSeparador extends Elemento {
-    public String separador;
+public final class ElementoSeparador extends Elemento {
+    private String separador;
     public ElementoSeparador() {
-        separador = "---------------------------------\r\n";
+        separador = "----------------------------------------------------------------"
+                + "--------------------------------------------------------------------"
+                + "---------------------------------------\r\n";
     }
     public String getElementoSeparador() {
         return separador;
     }
 
-    public void accept(Formato formato) {
+    public void accept(final Formato formato) {
         formato.visit(this);
     }
 }

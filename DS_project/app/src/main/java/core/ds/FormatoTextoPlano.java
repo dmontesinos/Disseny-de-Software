@@ -12,7 +12,7 @@ public class FormatoTextoPlano extends Formato {
 
     public void visit(ElementoSeparador separadorRecibido) {
         if (separadorRecibido != null) {
-            contenido += "---------------------------------\n";
+            contenido += separadorRecibido.getElementoSeparador();
         }
     }
 
