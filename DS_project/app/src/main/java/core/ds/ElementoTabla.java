@@ -10,7 +10,8 @@ public class ElementoTabla extends Elemento {
     private int nFilas;
     private int nColumnas;
     private ArrayList tabla;
-    private static final Logger Log = LoggerFactory.getLogger(ElementoTabla.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(ElementoTabla.class);
 
     /*Constructor con toda la estructura básica para una tabla por defecto.
      * Necesita de los parámetros de número de filas y columnas para crearlas
@@ -18,6 +19,11 @@ public class ElementoTabla extends Elemento {
     public ElementoTabla(final int filas, final int columnas) {
         setnFilas(filas);
         setnColumnas(columnas);
+        /*Pre-condición que determina que mínimamente hay 1
+         * fila y 1 columna.*/
+        if (!esValido()) {
+            throw new IllegalStateException();
+        }
         ArrayList nuevaTabla = new ArrayList();
 
         for (int i = 0; i < filas; i++) {
@@ -29,7 +35,7 @@ public class ElementoTabla extends Elemento {
         }
         setElementoTabla(nuevaTabla);
         invariante();
-        Log.info("Generando un ElementoTabla");
+        log.info("Generando un ElementoTabla");
     }
 
     public int getnFilas() {
@@ -57,7 +63,7 @@ public class ElementoTabla extends Elemento {
     public void setElementoTabla(final ArrayList<Elemento> tablaRecibida) {
         tabla = tablaRecibida;
         invariante();
-        Log.debug("Seteando valores en la tabla");
+        log.debug("Seteando valores en la tabla");
     }
 
     public void anadirFila() {
@@ -69,7 +75,7 @@ public class ElementoTabla extends Elemento {
         getElementoTabla().add(fila);
         setnFilas(getnFilas() + 1);
         invariante();
-        Log.debug("Añadiendo una fila a la tabla");
+        log.debug("Añadiendo una fila a la tabla");
     }
     /*Permite añadir una nueva fila a la tabla anteriormente creada
     * con el contenido que se le envíe por parámetro.*/
@@ -79,7 +85,7 @@ public class ElementoTabla extends Elemento {
         if (listaRecibida.size() > getnColumnas()) {
             setnColumnas(listaRecibida.size());
         }
-        Log.debug("Añadiendo una fila a la tabla");
+        log.debug("Añadiendo una fila a la tabla");
     }
     /*Devuelve el contenido de una posición concreta de la tabla
     solo indicando la fila y columna que se requiere.
@@ -93,7 +99,7 @@ public class ElementoTabla extends Elemento {
                          final int columna, final String texto) {
         invariante();
         ((ArrayList) getElementoTabla().get(fila)).set(columna, texto);
-        Log.debug("Añadiendo el valor: " + texto + " en la tabla en "
+        log.debug("Añadiendo el valor: " + texto + " en la tabla en "
                 + "la posición: " + fila + ", " + columna);
     }
 
@@ -103,5 +109,11 @@ public class ElementoTabla extends Elemento {
     private void invariante() {
         if (tabla == null) throw new AssertionError(
                 "La variable tabla no puede ser nula");
+    }
+    private boolean esValido() {
+        if (nFilas > 0 && nColumnas > 0) {
+            return true;
+        }
+        return false;
     }
 }

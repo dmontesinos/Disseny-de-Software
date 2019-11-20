@@ -14,14 +14,15 @@ import java.util.Iterator;
  * se genera la estructura y el volcado a un fichero local.*/
 public class InformeDetallado extends Informe {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
-    private static final Logger Log = LoggerFactory.getLogger(InformeDetallado.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(InformeDetallado.class);
 
 
     public InformeDetallado(final Date fechaInicialInforme,
                             final Date fechaFinalInforme) {
         super(fechaInicialInforme, fechaFinalInforme);
         invariante();
-        Log.info("Generando un informe detallado");
+        log.info("Generando un informe detallado");
     }
 
     /*Se necesita recorrer toda la estructura en forma de árbol y
@@ -46,7 +47,7 @@ public class InformeDetallado extends Informe {
             }
         }
         invariante();
-        Log.debug("Recuperando todas las tareas del árbol");
+        log.debug("Recuperando todas las tareas del árbol");
         return rActividades;
     }
     /*Esta función complementa a la otra para poder realizar la búsqueda
@@ -75,6 +76,11 @@ public class InformeDetallado extends Informe {
     * InformeBreve.*/
     public void escribirInforme(final Proyecto proyectoRecibido,
                                 final Formato formatoRecibido) {
+        /*Pre-condición que obliga a tener las variables de
+         * fechaInicial y fechaFinal seteadas previamente.*/
+        if (!esValido()) {
+            throw new IllegalStateException();
+        }
         FileWriter file = null;
         PrintWriter pw = null;
         try {
@@ -96,7 +102,7 @@ public class InformeDetallado extends Informe {
                 elemento.accept(formatoRecibido);
             }
             pw.write(formatoRecibido.getContenido());
-            Log.info("Escribiendo informe generado en disco");
+            log.info("Escribiendo informe generado en disco");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -146,7 +152,6 @@ public class InformeDetallado extends Informe {
         tablaProyectos.setValor(0, 3, "\t\tTiempo Total");
 
         if (!actividadesRecibidas.isEmpty()) {
-
             for (Actividad actividad: actividadesRecibidas) {
                 if (actividad.getClass() == Proyecto.class) {
                     int duracionFranja = actividad.getDuracionTotal(
@@ -189,7 +194,8 @@ public class InformeDetallado extends Informe {
                     for (Actividad proyecto: proy.getActividades()) {
                         if (proyecto.getClass() == Proyecto.class) {
                             if (proyecto.getDuracionTotal(
-                                    getFechaInicial(), getFechaFinal()) > 1000) {
+                                    getFechaInicial(),
+                                    getFechaFinal()) > 1000) {
                                 ArrayList fila = new ArrayList();
                                 fila.add(proyecto.getNombre());
                                 fila.add(proyecto.getPadre().getNombre());
@@ -290,7 +296,10 @@ public class InformeDetallado extends Informe {
 
         elementosInforme.add(new ElementoSeparador());
         elementosInforme.add(new ElementoParrafo("TimeTracker v0.1"));
-        Log.info("Preparando el informe detallado");
+        log.info("Preparando el informe detallado");
         return elementosInforme;
+    }
+    private boolean esValido() {
+        return fechaInicial != null && fechaFinal != null;
     }
 }

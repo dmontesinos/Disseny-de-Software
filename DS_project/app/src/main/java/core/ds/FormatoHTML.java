@@ -15,7 +15,8 @@ public class FormatoHTML extends Formato {
     private ContainerTag htmlPagina;
     private Tag cabecera = head();
     private ContainerTag cuerpo = body();
-    private static final Logger Log = LoggerFactory.getLogger(FormatoHTML.class);
+    private static final Logger Log =
+            LoggerFactory.getLogger(FormatoHTML.class);
 
     public FormatoHTML() {
         htmlPagina = html();

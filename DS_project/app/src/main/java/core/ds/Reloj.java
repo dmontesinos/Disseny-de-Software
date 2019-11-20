@@ -24,7 +24,7 @@ public final class Reloj extends TimerTask {
     private Reloj.Notificador notificador = new Reloj.Notificador();
     private static Timer reloj = null;
     private Proyecto proyectoRaiz;
-    private static final Logger Log = LoggerFactory.getLogger(Reloj.class);
+    private static final Logger log = LoggerFactory.getLogger(Reloj.class);
 
 
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
@@ -40,10 +40,10 @@ public final class Reloj extends TimerTask {
     public static Reloj getInstanciaReloj() {
         if (instanciaReloj  == null) {
             instanciaReloj  = new Reloj();
-            Log.debug("Generando nueva instancia de reloj");
+            log.debug("Generando nueva instancia de reloj");
         }
         invariante();
-        Log.debug("Recuperando instancia de reloj");
+        log.debug("Recuperando instancia de reloj");
         return instanciaReloj;
     }
 
@@ -52,7 +52,7 @@ public final class Reloj extends TimerTask {
             invariante();
             reloj.cancel();
         }
-        Log.debug("Parando reloj interno");
+        log.debug("Parando reloj interno");
     }
 
     public void comenzarPrintarArbol(final Proyecto proyecto) {
@@ -65,7 +65,7 @@ public final class Reloj extends TimerTask {
         notificador.informarNuevaFecha(new Date());
         proyectoRaiz.printarCabecera();
         proyectoRaiz.printar();
-        Log.debug("Notificando a los observadores");
+        log.debug("Notificando a los observadores");
     }
 
     public void anadirObservador(final Intervalo intervalo) {

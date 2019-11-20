@@ -6,7 +6,8 @@ import org.slf4j.LoggerFactory;
 /*Genera elementos de tipo título para los informes*/
 public class ElementoTitulo extends Elemento {
     private String titulo;
-    private static final Logger Log = LoggerFactory.getLogger(ElementoTitulo.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(ElementoTitulo.class);
 
     public ElementoTitulo() {
         titulo = null;
@@ -15,14 +16,14 @@ public class ElementoTitulo extends Elemento {
         titulo = tituloRecibido;
         titulo += "\n";
         invariante();
-        Log.info("Generando un ElementoTitulo");
+        log.info("Generando un ElementoTitulo");
     }
 
     public void setTitulo(final String tituloRecibido) {
         titulo = tituloRecibido;
         titulo += "\n";
         invariante();
-        Log.debug("Seteando el título");
+        log.debug("Seteando el título");
     }
 
     public String getElementoTitulo() {

@@ -6,7 +6,8 @@ import org.slf4j.LoggerFactory;
 /*Este elemento permite generar un subtitulo en los informes*/
 public class ElementoSubTitulo extends Elemento {
     private String subtitulo;
-    private static final Logger Log = LoggerFactory.getLogger(ElementoSubTitulo.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(ElementoSubTitulo.class);
 
     public ElementoSubTitulo() {
         subtitulo = null;
@@ -15,14 +16,14 @@ public class ElementoSubTitulo extends Elemento {
         subtitulo = subtituloRecibido;
         subtitulo += "\r\n";
         invariante();
-        Log.info("Generando un ElementoSubtitulo");
+        log.info("Generando un ElementoSubtitulo");
     }
 
     public void setSubTitulo(final String subtituloRecibido) {
         subtitulo = subtituloRecibido;
         subtitulo += "\r\n";
         invariante();
-        Log.debug("Seteando el subtítulo");
+        log.debug("Seteando el subtítulo");
     }
 
     public String getElementoSubtitulo() {

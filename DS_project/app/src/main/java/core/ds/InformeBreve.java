@@ -13,18 +13,24 @@ import java.util.Date;
 * estructura y el volcado a un fichero local.*/
 public class InformeBreve extends Informe {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
-    private static final Logger Log = LoggerFactory.getLogger(InformeBreve.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(InformeBreve.class);
 
     public InformeBreve(final Date fechaInicialInforme,
                         final Date fechaFinalInforme) {
         super(fechaInicialInforme, fechaFinalInforme);
         invariante();
-        Log.info("Generando informe breve");
+        log.info("Generando informe breve");
     }
     /*Esta función básicamente recoge los datos generados por la
     * función "prepararInforme()" y los guarda en un fichero local.*/
     public void escribirInforme(final Proyecto proyectoRecibido,
                                 final Formato formatoRecibido) {
+        /*Pre-condición que obliga a tener las variables de
+        * fechaInicial y fechaFinal seteadas previamente.*/
+        if (!esValido()) {
+            throw new IllegalStateException();
+        }
         FileWriter file = null;
         PrintWriter pw = null;
         try {
@@ -47,7 +53,7 @@ public class InformeBreve extends Informe {
                 elemento.accept(formatoRecibido);
             }
             pw.write(formatoRecibido.getContenido());
-            Log.info("Escribiendo informe generado en disco");
+            log.info("Escribiendo informe generado en disco");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -125,7 +131,10 @@ public class InformeBreve extends Informe {
         elementosInforme.add(tablaProyectos);
         elementosInforme.add(new ElementoSeparador());
 
-        Log.info("Preparando el informe breve");
+        log.info("Preparando el informe breve");
         return elementosInforme;
+    }
+    private boolean esValido() {
+        return fechaInicial != null && fechaFinal != null;
     }
 }

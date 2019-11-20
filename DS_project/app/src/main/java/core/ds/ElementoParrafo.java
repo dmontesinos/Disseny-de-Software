@@ -7,13 +7,13 @@ import org.slf4j.LoggerFactory;
 /*Este elemento sirve para generar un párrafo dentro de los informes*/
 public class ElementoParrafo extends Elemento {
     private String parrafo;
-    private static final Logger Log =
+    private static final Logger log =
             LoggerFactory.getLogger(ElementoParrafo.class);
 
     public ElementoParrafo(final String parrafoRecibido) {
         setElementoParrafo(parrafoRecibido);
         invariante();
-        Log.info("Generando un ElementoParrafo");
+        log.info("Generando un ElementoParrafo");
     }
 
     public String getElementoParrafo() {
@@ -24,7 +24,7 @@ public class ElementoParrafo extends Elemento {
     public void setElementoParrafo(final String parrafoRecibido) {
         parrafo = parrafoRecibido;
         invariante();
-        Log.debug("Seteando el párrafo");
+        log.debug("Seteando el párrafo");
     }
     private void invariante() {
         if (parrafo == null) throw new AssertionError(

@@ -17,14 +17,14 @@ public abstract class  Actividad implements Serializable {
     private Date horaFinal;
     private long duracionTotal;
     /*Esta variable nos da la posibilidad de utilizar el log*/
-    private static final Logger Log = LoggerFactory.getLogger(Actividad.class);
+    private static final Logger log = LoggerFactory.getLogger(Actividad.class);
 
     public Actividad(final String nombreRecibido,
                      final Proyecto padreRecibido) {
         this.setNombre(nombreRecibido);
         this.setPadre(padreRecibido);
 
-        Log.info("Se ha creado la actividad con nombre: "
+        log.info("Se ha creado la actividad con nombre: "
                 + this.getClass().getSimpleName() + " " + nombreRecibido);
     }
 

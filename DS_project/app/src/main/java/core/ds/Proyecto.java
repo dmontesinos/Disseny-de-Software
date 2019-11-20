@@ -13,14 +13,14 @@ public class Proyecto extends Actividad {
     private ArrayList<Actividad> actividades;
     private final Impresor impresor;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
-    private static final Logger Log = LoggerFactory.getLogger(Proyecto.class);
+    private static final Logger log = LoggerFactory.getLogger(Proyecto.class);
 
 
     public Proyecto(final String nombreRecibido, final Proyecto padreRecibido) {
         super(nombreRecibido, padreRecibido);
         actividades = new ArrayList<Actividad>();
         impresor = Impresor.getInstance();
-        Log.debug("Generando un nuevo proyecto");
+        log.debug("Generando un nuevo proyecto");
     }
 
 

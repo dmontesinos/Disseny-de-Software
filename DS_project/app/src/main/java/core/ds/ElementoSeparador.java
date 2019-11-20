@@ -6,7 +6,8 @@ import org.slf4j.LoggerFactory;
 /*Este elemento genera un separador (linea horizontal) en los informes*/
 public final class ElementoSeparador extends Elemento {
     private String separador;
-    private static final Logger Log = LoggerFactory.getLogger(ElementoSeparador.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(ElementoSeparador.class);
 
     public ElementoSeparador() {
         separador = "--------------------------------------------------"
@@ -14,7 +15,7 @@ public final class ElementoSeparador extends Elemento {
                 + "------------------------------------------------------"
                 + "-------------\r\n";
         invariante();
-        Log.info("Generando un ElementoSeparador");
+        log.info("Generando un ElementoSeparador");
     }
     public String getElementoSeparador() {
         invariante();

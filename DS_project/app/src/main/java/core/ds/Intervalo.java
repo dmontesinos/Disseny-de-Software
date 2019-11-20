@@ -19,7 +19,7 @@ public class Intervalo implements PropertyChangeListener, Serializable {
     private Date horaFinal;
     private Tarea tareaPadre;
     private long duracionTotal;
-    private static final Logger Log = LoggerFactory.getLogger(Intervalo.class);
+    private static final Logger log = LoggerFactory.getLogger(Intervalo.class);
 
 
     public Intervalo(final Date horaInicial, final Tarea padre) {
@@ -29,7 +29,12 @@ public class Intervalo implements PropertyChangeListener, Serializable {
         horaFinal = null;
         invariantePadre();
         invarianteInicio();
-        Log.debug("Creando un nuevo intervalo");
+        /*Post-condición que determina que la duración total es
+        * como mínimo un valor positivo.*/
+        if (!esValido()) {
+            throw new IllegalStateException();
+        }
+        log.debug("Creando un nuevo intervalo");
     }
 
     public final Date getHoraInicio() {
@@ -95,6 +100,9 @@ public class Intervalo implements PropertyChangeListener, Serializable {
     private void invarianteFinal() {
         if (horaFinal == null) throw new AssertionError(
                 "La variable horaFinal no puede ser nula");
+    }
+    private boolean esValido() {
+        return duracionTotal >= 0;
     }
 }
 
