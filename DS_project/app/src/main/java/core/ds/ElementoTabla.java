@@ -27,11 +27,13 @@ public class ElementoTabla extends Elemento {
 
 
     public ArrayList getElementoTabla() {
+        invariante();
         return tabla;
     }
 
     public void setElementoTabla(final ArrayList<Elemento> tablaRecibida) {
         tabla = tablaRecibida;
+        invariante();
     }
     /*Constructor con toda la estructura básica para una tabla por defecto.
     * Necesita de los parámetros de número de filas y columnas para crearlas
@@ -49,6 +51,7 @@ public class ElementoTabla extends Elemento {
             nuevaTabla.add(fila);
         }
         setElementoTabla(nuevaTabla);
+        invariante();
     }
 
     public void anadirFila() {
@@ -59,6 +62,7 @@ public class ElementoTabla extends Elemento {
         }
         getElementoTabla().add(fila);
         setnFilas(getnFilas() + 1);
+        invariante();
     }
     /*Permite añadir una nueva fila a la tabla anteriormente creada
     * con el contenido que se le envíe por parámetro.*/
@@ -79,10 +83,15 @@ public class ElementoTabla extends Elemento {
     * de la matríz bidimensional.*/
     public void setValor(final int fila,
                          final int columna, final String texto) {
+        invariante();
         ((ArrayList) getElementoTabla().get(fila)).set(columna, texto);
     }
 
     public void accept(final Formato formatoRecibido) {
         formatoRecibido.visit(this);
+    }
+    private void invariante() {
+        if (tabla == null) throw new AssertionError(
+                "La variable tabla no puede ser nula");
     }
 }

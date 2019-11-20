@@ -14,6 +14,7 @@ public class InformeBreve extends Informe {
     public InformeBreve(final Date fechaInicialInforme,
                         final Date fechaFinalInforme) {
         super(fechaInicialInforme, fechaFinalInforme);
+        invariante();
     }
     /*Esta función básicamente recoge los datos generados por la
     * función "prepararInforme()" y los guarda en un fichero local.*/
@@ -62,6 +63,7 @@ public class InformeBreve extends Informe {
     public ArrayList prepararInforme(
             final ArrayList<Actividad> actividadesRecibidas
     ) {
+        invariante();
         ArrayList<Elemento> elementosInforme = new ArrayList<>();
         elementosInforme.add(new ElementoSeparador());
         elementosInforme.add(new ElementoTitulo("Informe breve"));

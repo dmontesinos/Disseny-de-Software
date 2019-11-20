@@ -14,6 +14,7 @@ public abstract class Informe {
                    final Date fechaFinalInforme) {
         fechaInicial = fechaInicialInforme;
         fechaFinal = fechaFinalInforme;
+        invariante();
     }
     public abstract ArrayList prepararInforme(
             ArrayList<Actividad> actividadesRecibidas);
@@ -24,5 +25,11 @@ public abstract class Informe {
     }
     public Date getFechaFinal() {
         return fechaFinal;
+    }
+    protected void invariante() {
+        if (fechaInicial == null) throw new AssertionError(
+                "La variable fechaInicial no puede ser nula");
+        if (fechaFinal == null) throw new AssertionError(
+                "La variable fechaFinal no puede ser nula");
     }
 }

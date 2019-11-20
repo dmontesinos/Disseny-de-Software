@@ -36,11 +36,13 @@ public final class Reloj extends TimerTask {
         if (instanciaReloj  == null) {
             instanciaReloj  = new Reloj();
         }
+        invariante();
         return instanciaReloj;
     }
 
     public static void pararReloj() {
         if (reloj != null) {
+            invariante();
             reloj.cancel();
         }
     }
@@ -94,5 +96,15 @@ public final class Reloj extends TimerTask {
             providerChangeSupport.firePropertyChange("actualizacionHora",
                     fecha, nuevaFecha);
         }
+    }
+    /*Mediante la función invariante() nos aseguramos que se cumplen ciertos
+    * requisitos indispensables para que la aplicación funcione correctamente.
+    * Estos invariantes son de condición obligatoria o el incumplimiento genera
+    * un error crítico en el programa.*/
+    protected static void invariante() {
+        if (instanciaReloj == null)
+            throw new AssertionError("instanciaReloj no puede ser nulo");
+        if (reloj == null)
+            throw new AssertionError("reloj no puede ser nulo");
     }
 }

@@ -18,6 +18,7 @@ public class FormatoHTML extends Formato {
         cabecera.withTitle("Reporte");
         htmlPagina.with(cabecera);
         htmlPagina.with(cuerpo);
+        invariante();
     }
 
     @Override
@@ -29,11 +30,13 @@ public class FormatoHTML extends Formato {
     public void visit(final ElementoTitulo titulo) {
         cuerpo.with(h1(titulo.getElementoTitulo()));
         cabecera.withTitle(titulo.getElementoTitulo());
+        invariante();
     }
 
     @Override
     public void visit(final ElementoSubTitulo subTitulo) {
         cuerpo.with(h2(subTitulo.getElementoSubtitulo()));
+        invariante();
     }
     /*En esta función se define como debe imprimirse una tabla siguiendo
     * las herramientas proporcionadas por la extension j2html. El sistema
@@ -84,6 +87,7 @@ public class FormatoHTML extends Formato {
         }
         tablaHTML.attr("border", 1);
         cuerpo.with(tablaHTML);
+        invariante();
     }
 
     @Override
@@ -96,5 +100,13 @@ public class FormatoHTML extends Formato {
     @Override
     public String getContenido() {
         return htmlPagina.renderFormatted();
+    }
+    private void invariante() {
+        if (htmlPagina == null) throw new AssertionError(
+                "La variable htmlPagina no puede ser nula");
+        if (cabecera == null) throw new AssertionError(
+                "La variable cabecera no puede ser nula");
+        if (cuerpo == null) throw new AssertionError(
+                "La variable cuerpo no puede ser nula");
     }
 }

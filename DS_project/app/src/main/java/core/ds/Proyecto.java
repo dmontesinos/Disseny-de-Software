@@ -62,6 +62,7 @@ public class Proyecto extends Actividad {
             }
         }
         //return Math.round(duracionTotalFranja/1000);
+        invariante();
         return duracionTotalFranja;
     }
 
@@ -71,5 +72,10 @@ public class Proyecto extends Actividad {
 
     public void acceptCabecera(final Visitor visitor) {
         visitor.visitCabecera(this);
+    }
+    private void invariante() {
+        if (actividades == null) throw new AssertionError(
+                "Actividades no puede ser un valor nulo para realizar"
+                        + "la suma de los valores.");
     }
 }

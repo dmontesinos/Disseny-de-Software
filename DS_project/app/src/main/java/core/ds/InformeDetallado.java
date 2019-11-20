@@ -16,6 +16,7 @@ public class InformeDetallado extends Informe {
     public InformeDetallado(final Date fechaInicialInforme,
                             final Date fechaFinalInforme) {
         super(fechaInicialInforme, fechaFinalInforme);
+        invariante();
     }
 
     /*Se necesita recorrer toda la estructura en forma de árbol y
@@ -39,6 +40,7 @@ public class InformeDetallado extends Informe {
                         actividad.getActividades().iterator(), rActividades);
             }
         }
+        invariante();
         return rActividades;
     }
     /*Esta función complementa a la otra para poder realizar la búsqueda
@@ -59,6 +61,7 @@ public class InformeDetallado extends Informe {
                         activitatsResultat);
             }
         }
+        invariante();
         return activitatsResultat;
     }
     /*Imprime el informe preparado por la función prepararInforme()
@@ -105,6 +108,7 @@ public class InformeDetallado extends Informe {
     * los subproyectos, las tareas y los intérvalos de la estructura.*/
     public ArrayList prepararInforme(
             final ArrayList<Actividad> actividadesRecibidas) {
+        invariante();
         ArrayList<Elemento> elementosInforme = new ArrayList<>();
         elementosInforme.add(new ElementoSeparador());
         elementosInforme.add(new ElementoTitulo("Informe detallado"));
@@ -282,11 +286,4 @@ public class InformeDetallado extends Informe {
         elementosInforme.add(new ElementoParrafo("TimeTracker v0.1"));
         return elementosInforme;
     }
-
-
-
-
-
-
-
 }

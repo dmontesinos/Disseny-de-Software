@@ -15,6 +15,7 @@ final class Impresor implements Visitor {
             uniqueInstance = new Impresor();
             return uniqueInstance;
         } else {
+            invariante();
             return uniqueInstance;
         }
     }
@@ -32,6 +33,7 @@ final class Impresor implements Visitor {
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t00:00:00");
         }
         proyecto.printar();
+        invariante();
     }
     /*Define la forma de imprimir por consola el contenido de una tarea
      * y sus parámetros principales.*/
@@ -44,6 +46,7 @@ final class Impresor implements Visitor {
         } else {
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t00:00:00");
         }
+        invariante();
     }
     /*Función necesaria para dar un formato más bonito a la cabecera y
     * adaptarla al máxaimo al contenido que se imprime posteriormente.
@@ -65,5 +68,10 @@ final class Impresor implements Visitor {
         } else {
             System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t00:00:00");
         }
+        invariante();
+    }
+    private static void invariante() {
+        if (uniqueInstance == null) throw new AssertionError(
+                "La variable uniqueInstance no puede ser nula");
     }
 }

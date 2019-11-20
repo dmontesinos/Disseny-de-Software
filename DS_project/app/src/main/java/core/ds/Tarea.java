@@ -1,6 +1,5 @@
 package core.ds;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -30,6 +29,7 @@ public class Tarea extends Actividad  {
         if (this.getHoraInicio() == null) {
             this.setHoraInicio(new Date());
         }
+        invariante();
     }
     /*Función encargada cerrar los intérvalos. De misma forma,
     se asigna la fecha final del intérvalo y es borrado del array
@@ -39,6 +39,7 @@ public class Tarea extends Actividad  {
         Intervalo intervalo = intervalos.getLast();
         this.setHoraFinal(intervalo.getHoraFinal());
         reloj.borrarObservador(intervalo);
+        invariante();
     }
 
     /*Función recursiva encargada de calcular el tiempo total de la tarea.
@@ -92,10 +93,15 @@ public class Tarea extends Actividad  {
                 }
             }
         }
+        invariante();
         return duracionTotalFranja;
     }
     public final LinkedList getIntervalos() {
+        invariante();
         return intervalos;
     }
-
+    private void invariante() {
+        if (intervalos == null) throw new AssertionError(
+                "La variable intervalos no puede ser nula");
+    }
 }

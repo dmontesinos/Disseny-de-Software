@@ -23,9 +23,12 @@ public class Intervalo implements PropertyChangeListener, Serializable {
         setTareaPadre(padre);
         duracionTotal = 0;
         horaFinal = null;
+        invariantePadre();
+        invarianteInicio();
     }
 
     public final Date getHoraInicio() {
+        invarianteInicio();
         return horaInicio;
     }
 
@@ -34,19 +37,23 @@ public class Intervalo implements PropertyChangeListener, Serializable {
     }
 
     public final Date getHoraFinal() {
+        invarianteFinal();
         return horaFinal;
     }
 
     public void setHoraFinal(final Date hFinal) {
         horaFinal = hFinal;
+        invarianteFinal();
     }
 
     public final Tarea getTareaPadre() {
+        invariantePadre();
         return tareaPadre;
     }
 
     public void setTareaPadre(final Tarea tPadre) {
         tareaPadre = tPadre;
+        invariantePadre();
     }
 
     public void setDuracionTotal(final long valor) {
@@ -72,6 +79,18 @@ public class Intervalo implements PropertyChangeListener, Serializable {
     public void actualizarPadreRec(final Date nuevaHoraSistema) {
         tareaPadre.actualizarFinal(nuevaHoraSistema);
         setHoraFinal(nuevaHoraSistema);
+    }
+    private void invariantePadre() {
+        if (tareaPadre == null) throw new AssertionError(
+                "La variable tareaPadre no puede ser nula");
+    }
+    private void invarianteInicio() {
+        if (horaInicio == null) throw new AssertionError(
+                "La variable horaInicio no puede ser nula");
+    }
+    private void invarianteFinal() {
+        if (horaFinal == null) throw new AssertionError(
+                "La variable horaFinal no puede ser nula");
     }
 }
 

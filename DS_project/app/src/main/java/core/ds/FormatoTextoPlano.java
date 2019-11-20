@@ -10,24 +10,28 @@ public class FormatoTextoPlano extends Formato {
     }
 
     public String getContenido() {
+        invariante();
         return contenido;
     }
 
     public void visit(final ElementoSeparador separadorRecibido) {
         if (separadorRecibido != null) {
             contenido += separadorRecibido.getElementoSeparador();
+            invariante();
         }
     }
 
     public void visit(final ElementoTitulo tituloRecibido) {
         if (tituloRecibido.getElementoTitulo() != null) {
             contenido += tituloRecibido.getElementoTitulo();
+            invariante();
         }
     }
 
     public void visit(final ElementoSubTitulo subtituloRecibido) {
         if (subtituloRecibido.getElementoSubtitulo() != null) {
             contenido += subtituloRecibido.getElementoSubtitulo();
+            invariante();
         }
     }
     /*Se rellena el contenido de forma ordenada para posteriormente
@@ -48,12 +52,18 @@ public class FormatoTextoPlano extends Formato {
                 }
             }
             contenido += "\n";
+            invariante();
         }
     }
 
     public void visit(final ElementoParrafo parrafoRecibido) {
         if (parrafoRecibido.getElementoParrafo() != null) {
             contenido += parrafoRecibido.getElementoParrafo();
+            invariante();
         }
+    }
+    private void invariante() {
+        if (contenido == null) throw new AssertionError(
+                "La variable contenido no puede ser nula");
     }
 }
