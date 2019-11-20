@@ -1,5 +1,8 @@
 package core.ds;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.Serializable;
@@ -16,6 +19,7 @@ public class Intervalo implements PropertyChangeListener, Serializable {
     private Date horaFinal;
     private Tarea tareaPadre;
     private long duracionTotal;
+    private static final Logger Log = LoggerFactory.getLogger(Intervalo.class);
 
 
     public Intervalo(final Date horaInicial, final Tarea padre) {
@@ -25,6 +29,7 @@ public class Intervalo implements PropertyChangeListener, Serializable {
         horaFinal = null;
         invariantePadre();
         invarianteInicio();
+        Log.debug("Creando un nuevo intervalo");
     }
 
     public final Date getHoraInicio() {
@@ -37,7 +42,6 @@ public class Intervalo implements PropertyChangeListener, Serializable {
     }
 
     public final Date getHoraFinal() {
-        invarianteFinal();
         return horaFinal;
     }
 

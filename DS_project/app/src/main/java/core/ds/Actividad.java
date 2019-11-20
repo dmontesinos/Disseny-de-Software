@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /* Clase abstracta con métodos destinados a actualizar recursivamente
 los tiempos finales e iniciales. Algunos métodos están implementado en
 sus hijos, dado que se implementan de forma particular. */
@@ -13,14 +16,20 @@ public abstract class  Actividad implements Serializable {
     private Date horaInicio;
     private Date horaFinal;
     private long duracionTotal;
+    /*Esta variable nos da la posibilidad de utilizar el log*/
+    private static final Logger Log = LoggerFactory.getLogger(Actividad.class);
 
     public Actividad(final String nombreRecibido,
                      final Proyecto padreRecibido) {
         this.setNombre(nombreRecibido);
         this.setPadre(padreRecibido);
+
+        Log.info("Se ha creado la actividad con nombre: "
+                + this.getClass().getSimpleName() + " " + nombreRecibido);
     }
 
     public final Proyecto getPadre() {
+        invariante();
         return padre;
     }
 
@@ -101,6 +110,11 @@ public abstract class  Actividad implements Serializable {
     public ArrayList<Actividad> getActividades() {
         return null;
     }
-
+    private void invariante() {
+        if (padre == null) throw new AssertionError(
+                "La variable padre no puede ser nula");
+        if (nombre == null) throw new AssertionError(
+                "La variable nombre no puede ser nula");
+    }
 }
 

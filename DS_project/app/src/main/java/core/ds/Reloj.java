@@ -1,5 +1,8 @@
 package core.ds;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.text.SimpleDateFormat;
@@ -21,6 +24,7 @@ public final class Reloj extends TimerTask {
     private Reloj.Notificador notificador = new Reloj.Notificador();
     private static Timer reloj = null;
     private Proyecto proyectoRaiz;
+    private static final Logger Log = LoggerFactory.getLogger(Reloj.class);
 
 
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
@@ -30,13 +34,16 @@ public final class Reloj extends TimerTask {
         //Daemon para que el thread corra de fondo
         reloj = new Timer();
         reloj.scheduleAtFixedRate(this, 0, SEGUNDOS * MILISEGUNDOS);
+
     }
     //Singleton, solo una instancia de un reloj, si existe no lo crea
     public static Reloj getInstanciaReloj() {
         if (instanciaReloj  == null) {
             instanciaReloj  = new Reloj();
+            Log.debug("Generando nueva instancia de reloj");
         }
         invariante();
+        Log.debug("Recuperando instancia de reloj");
         return instanciaReloj;
     }
 
@@ -45,6 +52,7 @@ public final class Reloj extends TimerTask {
             invariante();
             reloj.cancel();
         }
+        Log.debug("Parando reloj interno");
     }
 
     public void comenzarPrintarArbol(final Proyecto proyecto) {
@@ -57,6 +65,7 @@ public final class Reloj extends TimerTask {
         notificador.informarNuevaFecha(new Date());
         proyectoRaiz.printarCabecera();
         proyectoRaiz.printar();
+        Log.debug("Notificando a los observadores");
     }
 
     public void anadirObservador(final Intervalo intervalo) {

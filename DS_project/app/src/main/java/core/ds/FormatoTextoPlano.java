@@ -1,16 +1,22 @@
 package core.ds;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /*Clase destinada a la definición de todos los elementos que componen el
 * formulario con la finalidad de imprimirlos cada uno de una forma deter-
 * minada. Es necesaria esta clase para poder imprimir en formato TXT, al
 * igual que tenemos definida la de HTML con otro formato específico.*/
 public class FormatoTextoPlano extends Formato {
     private String contenido = null;
+    private static final Logger Log = LoggerFactory.getLogger(FormatoTextoPlano.class);
     public FormatoTextoPlano() {
         super();
     }
 
     public String getContenido() {
         invariante();
+        Log.info("Transformando contenido formateado en formato TXT");
         return contenido;
     }
 
@@ -18,6 +24,7 @@ public class FormatoTextoPlano extends Formato {
         if (separadorRecibido != null) {
             contenido += separadorRecibido.getElementoSeparador();
             invariante();
+            Log.debug("Generando separador en formato TXT");
         }
     }
 
@@ -25,6 +32,7 @@ public class FormatoTextoPlano extends Formato {
         if (tituloRecibido.getElementoTitulo() != null) {
             contenido += tituloRecibido.getElementoTitulo();
             invariante();
+            Log.debug("Generando título en formato TXT");
         }
     }
 
@@ -32,6 +40,7 @@ public class FormatoTextoPlano extends Formato {
         if (subtituloRecibido.getElementoSubtitulo() != null) {
             contenido += subtituloRecibido.getElementoSubtitulo();
             invariante();
+            Log.debug("Generando subtítulo en formato TXT");
         }
     }
     /*Se rellena el contenido de forma ordenada para posteriormente
@@ -53,6 +62,7 @@ public class FormatoTextoPlano extends Formato {
             }
             contenido += "\n";
             invariante();
+            Log.debug("Generando tabla en formato TXT");
         }
     }
 
@@ -60,6 +70,7 @@ public class FormatoTextoPlano extends Formato {
         if (parrafoRecibido.getElementoParrafo() != null) {
             contenido += parrafoRecibido.getElementoParrafo();
             invariante();
+            Log.debug("Generando párrafo en formato TXT");
         }
     }
     private void invariante() {

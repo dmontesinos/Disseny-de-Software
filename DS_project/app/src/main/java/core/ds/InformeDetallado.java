@@ -1,5 +1,8 @@
 package core.ds;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -11,12 +14,14 @@ import java.util.Iterator;
  * se genera la estructura y el volcado a un fichero local.*/
 public class InformeDetallado extends Informe {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
+    private static final Logger Log = LoggerFactory.getLogger(InformeDetallado.class);
 
 
     public InformeDetallado(final Date fechaInicialInforme,
                             final Date fechaFinalInforme) {
         super(fechaInicialInforme, fechaFinalInforme);
         invariante();
+        Log.info("Generando un informe detallado");
     }
 
     /*Se necesita recorrer toda la estructura en forma de árbol y
@@ -41,6 +46,7 @@ public class InformeDetallado extends Informe {
             }
         }
         invariante();
+        Log.debug("Recuperando todas las tareas del árbol");
         return rActividades;
     }
     /*Esta función complementa a la otra para poder realizar la búsqueda
@@ -90,7 +96,7 @@ public class InformeDetallado extends Informe {
                 elemento.accept(formatoRecibido);
             }
             pw.write(formatoRecibido.getContenido());
-            System.out.println();
+            Log.info("Escribiendo informe generado en disco");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -284,6 +290,7 @@ public class InformeDetallado extends Informe {
 
         elementosInforme.add(new ElementoSeparador());
         elementosInforme.add(new ElementoParrafo("TimeTracker v0.1"));
+        Log.info("Preparando el informe detallado");
         return elementosInforme;
     }
 }

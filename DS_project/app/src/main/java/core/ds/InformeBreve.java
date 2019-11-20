@@ -1,5 +1,8 @@
 package core.ds;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -10,11 +13,13 @@ import java.util.Date;
 * estructura y el volcado a un fichero local.*/
 public class InformeBreve extends Informe {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
+    private static final Logger Log = LoggerFactory.getLogger(InformeBreve.class);
 
     public InformeBreve(final Date fechaInicialInforme,
                         final Date fechaFinalInforme) {
         super(fechaInicialInforme, fechaFinalInforme);
         invariante();
+        Log.info("Generando informe breve");
     }
     /*Esta función básicamente recoge los datos generados por la
     * función "prepararInforme()" y los guarda en un fichero local.*/
@@ -42,7 +47,7 @@ public class InformeBreve extends Informe {
                 elemento.accept(formatoRecibido);
             }
             pw.write(formatoRecibido.getContenido());
-            System.out.println();
+            Log.info("Escribiendo informe generado en disco");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -120,6 +125,7 @@ public class InformeBreve extends Informe {
         elementosInforme.add(tablaProyectos);
         elementosInforme.add(new ElementoSeparador());
 
+        Log.info("Preparando el informe breve");
         return elementosInforme;
     }
 }

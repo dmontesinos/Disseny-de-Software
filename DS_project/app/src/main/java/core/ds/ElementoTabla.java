@@ -1,5 +1,8 @@
 package core.ds;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 /*Permite generar elemento tabla y gestionarlo eficientemente
 * para la generación de los formularios.*/
@@ -7,7 +10,27 @@ public class ElementoTabla extends Elemento {
     private int nFilas;
     private int nColumnas;
     private ArrayList tabla;
+    private static final Logger Log = LoggerFactory.getLogger(ElementoTabla.class);
 
+    /*Constructor con toda la estructura básica para una tabla por defecto.
+     * Necesita de los parámetros de número de filas y columnas para crearlas
+     * correctamente. Se trata de un Array bidimensional.*/
+    public ElementoTabla(final int filas, final int columnas) {
+        setnFilas(filas);
+        setnColumnas(columnas);
+        ArrayList nuevaTabla = new ArrayList();
+
+        for (int i = 0; i < filas; i++) {
+            ArrayList fila = new ArrayList<>();
+            for (int j = 0; j < columnas; j++) {
+                fila.add(null);
+            }
+            nuevaTabla.add(fila);
+        }
+        setElementoTabla(nuevaTabla);
+        invariante();
+        Log.info("Generando un ElementoTabla");
+    }
 
     public int getnFilas() {
         return nFilas;
@@ -34,24 +57,7 @@ public class ElementoTabla extends Elemento {
     public void setElementoTabla(final ArrayList<Elemento> tablaRecibida) {
         tabla = tablaRecibida;
         invariante();
-    }
-    /*Constructor con toda la estructura básica para una tabla por defecto.
-    * Necesita de los parámetros de número de filas y columnas para crearlas
-    * correctamente. Se trata de un Array bidimensional.*/
-    public ElementoTabla(final int filas, final int columnas) {
-        setnFilas(filas);
-        setnColumnas(columnas);
-        ArrayList nuevaTabla = new ArrayList();
-
-        for (int i = 0; i < filas; i++) {
-            ArrayList fila = new ArrayList<>();
-            for (int j = 0; j < columnas; j++) {
-                fila.add(null);
-            }
-            nuevaTabla.add(fila);
-        }
-        setElementoTabla(nuevaTabla);
-        invariante();
+        Log.debug("Seteando valores en la tabla");
     }
 
     public void anadirFila() {
@@ -63,6 +69,7 @@ public class ElementoTabla extends Elemento {
         getElementoTabla().add(fila);
         setnFilas(getnFilas() + 1);
         invariante();
+        Log.debug("Añadiendo una fila a la tabla");
     }
     /*Permite añadir una nueva fila a la tabla anteriormente creada
     * con el contenido que se le envíe por parámetro.*/
@@ -72,6 +79,7 @@ public class ElementoTabla extends Elemento {
         if (listaRecibida.size() > getnColumnas()) {
             setnColumnas(listaRecibida.size());
         }
+        Log.debug("Añadiendo una fila a la tabla");
     }
     /*Devuelve el contenido de una posición concreta de la tabla
     solo indicando la fila y columna que se requiere.
@@ -85,6 +93,8 @@ public class ElementoTabla extends Elemento {
                          final int columna, final String texto) {
         invariante();
         ((ArrayList) getElementoTabla().get(fila)).set(columna, texto);
+        Log.debug("Añadiendo el valor: " + texto + " en la tabla en "
+                + "la posición: " + fila + ", " + columna);
     }
 
     public void accept(final Formato formatoRecibido) {

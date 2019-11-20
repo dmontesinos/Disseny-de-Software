@@ -1,4 +1,7 @@
 package core.ds;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Date;
 
 import j2html.tags.ContainerTag;
@@ -12,6 +15,7 @@ public class FormatoHTML extends Formato {
     private ContainerTag htmlPagina;
     private Tag cabecera = head();
     private ContainerTag cuerpo = body();
+    private static final Logger Log = LoggerFactory.getLogger(FormatoHTML.class);
 
     public FormatoHTML() {
         htmlPagina = html();
@@ -19,11 +23,13 @@ public class FormatoHTML extends Formato {
         htmlPagina.with(cabecera);
         htmlPagina.with(cuerpo);
         invariante();
+        Log.debug("Inicializando el documento HTML");
     }
 
     @Override
     public void visit(final ElementoSeparador separador) {
         cuerpo.with(hr());
+        Log.debug("Añadiendo separador al HTML");
     }
 
     @Override
@@ -31,12 +37,14 @@ public class FormatoHTML extends Formato {
         cuerpo.with(h1(titulo.getElementoTitulo()));
         cabecera.withTitle(titulo.getElementoTitulo());
         invariante();
+        Log.debug("Añadiendo título al HTML");
     }
 
     @Override
     public void visit(final ElementoSubTitulo subTitulo) {
         cuerpo.with(h2(subTitulo.getElementoSubtitulo()));
         invariante();
+        Log.debug("Añadiendo subtitulo al HTML");
     }
     /*En esta función se define como debe imprimirse una tabla siguiendo
     * las herramientas proporcionadas por la extension j2html. El sistema
@@ -88,17 +96,20 @@ public class FormatoHTML extends Formato {
         tablaHTML.attr("border", 1);
         cuerpo.with(tablaHTML);
         invariante();
+        Log.debug("Añadiendo tabla al HTML");
     }
 
     @Override
     public void visit(final ElementoParrafo parrafo) {
-
+        cuerpo.with(p(parrafo.getElementoParrafo()));
+        Log.debug("Añadiendo párrafo al HTML");
     }
     /*Es necesario realizar el renderFormatted para devolver el contenido
     * del plugin en formato String. Mediante ese comando se realiza la con-
     * versión y se retorna en formato cadena.*/
     @Override
     public String getContenido() {
+        Log.info("Transformando contenido formateado en HTML");
         return htmlPagina.renderFormatted();
     }
     private void invariante() {
