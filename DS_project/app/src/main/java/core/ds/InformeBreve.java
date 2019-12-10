@@ -114,7 +114,7 @@ public class InformeBreve extends Informe {
                     int duracionFranja = actividad.getDuracionTotal(
                             getFechaInicial(), getFechaFinal()
                     );
-                    if (duracionFranja > 1000) {
+                    if (duracionFranja > 1) {
                         ArrayList fila = new ArrayList();
                         fila.add(actividad.getNombre());
                         fila.add(actividad.getPadre().getHoraInicio());

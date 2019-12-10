@@ -173,9 +173,9 @@ public class Cliente {
         tarea3.iniciarTarea();
         sleep(2000);
         tarea3.detenerTarea();
-        /*tarea4.iniciarTarea();
+        tarea4.iniciarTarea();
         sleep(2000);
-        tarea3.detenerTarea();*/
+        tarea3.detenerTarea();
 
         Reloj.pararReloj();
 

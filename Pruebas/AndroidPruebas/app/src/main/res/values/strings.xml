@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Time Tracker v0.1</string>
+    <string-array name="items_lista">
+        <item>Dani</item>
+        <item>Prueba</item>
+        <item>Ketchup</item>
+
+    </string-array>
+</resources>

@@ -52,6 +52,7 @@ public class Tarea extends Actividad  {
             total += i.getDuracionTotal();
         }
         setDuracionTotal(total);
+
         return total;
     }
 
@@ -104,7 +105,7 @@ public class Tarea extends Actividad  {
             }
         }
         invariante();
-        return duracionTotalFranja;
+        return Math.round(duracionTotalFranja)/1000;
     }
     public final LinkedList getIntervalos() {
         invariante();

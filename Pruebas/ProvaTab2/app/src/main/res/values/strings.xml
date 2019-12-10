@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TimeTracker</string>
+    <string name="titol_tab1">Projectes</string>
+    <string name="titol_tab2">Tasques</string>
+</resources>

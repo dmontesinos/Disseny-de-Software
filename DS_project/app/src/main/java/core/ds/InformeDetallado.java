@@ -156,7 +156,7 @@ public class InformeDetallado extends Informe {
                 if (actividad.getClass() == Proyecto.class) {
                     int duracionFranja = actividad.getDuracionTotal(
                             getFechaInicial(), getFechaFinal());
-                    if (duracionFranja > 1000) {
+                    if (duracionFranja > 1) {
                         ArrayList fila = new ArrayList();
                         fila.add(actividad.getNombre());
                         fila.add(actividad.getPadre().getHoraInicio());
@@ -195,7 +195,7 @@ public class InformeDetallado extends Informe {
                         if (proyecto.getClass() == Proyecto.class) {
                             if (proyecto.getDuracionTotal(
                                     getFechaInicial(),
-                                    getFechaFinal()) > 1000) {
+                                    getFechaFinal()) > 1) {
                                 ArrayList fila = new ArrayList();
                                 fila.add(proyecto.getNombre());
                                 fila.add(proyecto.getPadre().getNombre());
@@ -234,7 +234,7 @@ public class InformeDetallado extends Informe {
             for (Object t: todasLasActividades) {
                 Tarea tarea = (Tarea) t;
                 if (tarea.getDuracionTotal(getFechaInicial(),
-                        getFechaFinal()) > 1000) {
+                        getFechaFinal()) > 1) {
                     ArrayList fila = new ArrayList();
                     fila.add(tarea.getNombre());
                     fila.add(tarea.getPadre().getNombre());
@@ -273,7 +273,7 @@ public class InformeDetallado extends Informe {
                 int contador = 1;
                 Tarea tarea = (Tarea) t;
                 if (tarea.getDuracionTotal(getFechaInicial(),
-                        getFechaFinal()) > 1000) {
+                        getFechaFinal()) > 1) {
                     for (Object intervalo: tarea.getIntervalos()) {
                         Intervalo inter = (Intervalo) intervalo;
 
@@ -285,7 +285,7 @@ public class InformeDetallado extends Informe {
                         contador++;
                         fila.add(inter.getHoraInicio());
                         fila.add(inter.getHoraFinal());
-                        fila.add(inter.getDuracionTotal() * 1000);
+                        fila.add(inter.getDuracionTotal());
 
                         tablaDatosIntervalos.anadirFila(fila);
                     }

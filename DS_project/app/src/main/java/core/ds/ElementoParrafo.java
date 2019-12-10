@@ -23,11 +23,18 @@ public class ElementoParrafo extends Elemento {
 
     public void setElementoParrafo(final String parrafoRecibido) {
         parrafo = parrafoRecibido;
-        invariante();
+        /*Post-condición que determina que el valor es
+         * distinto a null después del set.*/
+        if (!esValido()) {
+            throw new IllegalStateException();
+        }
         log.debug("Seteando el párrafo");
     }
     private void invariante() {
         if (parrafo == null) throw new AssertionError(
                 "La variable párrafo no puede ser nula");
+    }
+    private boolean esValido() {
+        return parrafo != null;
     }
 }

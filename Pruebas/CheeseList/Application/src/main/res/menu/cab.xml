@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- "Edit" and "Remove", should appear as action button if possible; , the action is displayed as
+    a button if there is room in the app bar for it; if there is not enough room, excess actions
+    are sent to the overflow menu -->
+    <item
+        android:id="@+id/menu_edit"
+        android:icon="@drawable/ic_edit_white_24dp"
+        android:title="@string/menu_edit"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/menu_remove"
+        android:icon="@drawable/ic_delete_white_24dp"
+        android:title="@string/menu_remove"
+        app:showAsAction="ifRoom"/>
+    <!-- Settings, should always be in the overflow -->
+    <item android:id="@+id/menu_settings"
+        android:title="@string/menu_settings"
+        app:showAsAction="never"/>
+</menu>
