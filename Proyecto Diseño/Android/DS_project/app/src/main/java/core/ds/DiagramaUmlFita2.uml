@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>VisitorElementos</OriginalElement>
+  <nodes>
+    <node x="399.99999999999994" y="564.0">Proyecto</node>
+    <node x="1153.0" y="399.0">FormatoHTML</node>
+    <node x="755.5" y="253.0">Intervalo</node>
+    <node x="0.0" y="1513.0">Visitor</node>
+    <node x="0.0" y="1657.0">Impresor</node>
+    <node x="1273.0" y="1093.0">Elemento</node>
+    <node x="126.5" y="76.0">java.lang.Runnable</node>
+    <node x="888.0" y="1259.0">ElementoSeparador</node>
+    <node x="88.0" y="0.0">java.lang.FunctionalInterface</node>
+    <node x="325.25" y="1093.0">Informe</node>
+    <node x="0.0" y="909.0">Reloj.Notificador</node>
+    <node x="70.5" y="176.0">java.util.TimerTask</node>
+    <node x="1378.0" y="399.0">FormatoTextoPlano</node>
+    <node x="243.0" y="1513.0">Cliente</node>
+    <node x="1706.0" y="1237.0">ElementoSubTitulo</node>
+    <node x="55.5" y="520.0">Reloj</node>
+    <node x="0.0" y="1306.0">InformeDetallado</node>
+    <node x="636.9999999999999" y="597.0">Tarea</node>
+    <node x="1265.0" y="1270.5">ElementoParrafo</node>
+    <node x="594.5" y="88.0">java.io.Serializable</node>
+    <node x="1265.5" y="188.0">Formato</node>
+    <node x="898.5" y="0.0">java.util.EventListener</node>
+    <node x="541.0" y="1328.0">InformeBreve</node>
+    <node x="826.0" y="76.0">java.beans.PropertyChangeListener</node>
+    <node x="1265.5" y="0.0">VisitorElementos</node>
+    <node x="518.5" y="176.0">Actividad</node>
+    <node x="1462.0" y="1193.0">ElementoTabla</node>
+    <node x="1076.0" y="1237.0">ElementoTitulo</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="InformeBreve" target="Informe">
+      <point x="0.0" y="-59.0" />
+      <point x="692.0" y="1281.0" />
+      <point x="551.75" y="1281.0" />
+      <point x="75.5" y="81.5" />
+    </edge>
+    <edge source="Formato" target="VisitorElementos">
+      <point x="0.0" y="-80.5" />
+      <point x="0.0" y="69.0" />
+    </edge>
+    <edge source="java.util.TimerTask" target="java.lang.Runnable">
+      <point x="0.0" y="-147.0" />
+      <point x="0.0" y="25.0" />
+    </edge>
+    <edge source="FormatoHTML" target="Formato">
+      <point x="0.0" y="-92.0" />
+      <point x="1255.5" y="374.0" />
+      <point x="1316.75" y="374.0" />
+      <point x="-51.25" y="80.5" />
+    </edge>
+    <edge source="ElementoSeparador" target="Elemento">
+      <point x="0.0" y="-48.0" />
+      <point x="972.0" y="1163.0" />
+      <point x="1289.1" y="1163.0" />
+      <point x="-64.40000000000009" y="25.0" />
+    </edge>
+    <edge source="Intervalo" target="java.beans.PropertyChangeListener">
+      <point x="70.5" y="-92.0" />
+      <point x="0.0" y="25.0" />
+    </edge>
+    <edge source="java.beans.PropertyChangeListener" target="java.util.EventListener">
+      <point x="0.0" y="-25.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="java.lang.Runnable" target="java.lang.FunctionalInterface">
+      <point x="0.0" y="-25.0" />
+      <point x="0.0" y="13.0" />
+    </edge>
+    <edge source="ElementoParrafo" target="Elemento">
+      <point x="0.0" y="-36.5" />
+      <point x="0.0" y="25.0" />
+    </edge>
+    <edge source="Reloj" target="java.util.TimerTask">
+      <point x="0.0" y="-169.5" />
+      <point x="0.0" y="147.0" />
+    </edge>
+    <edge source="FormatoTextoPlano" target="Formato">
+      <point x="0.0" y="-92.0" />
+      <point x="1480.5" y="374.0" />
+      <point x="1419.25" y="374.0" />
+      <point x="51.25" y="80.5" />
+    </edge>
+    <edge source="Reloj.Notificador" target="Reloj">
+      <point x="0.0" y="-69.5" />
+      <point x="0.0" y="169.5" />
+    </edge>
+    <edge source="Actividad" target="java.io.Serializable">
+      <point x="0.0" y="-169.0" />
+      <point x="-32.5" y="13.0" />
+    </edge>
+    <edge source="ElementoTabla" target="Elemento">
+      <point x="0.0" y="-114.0" />
+      <point x="1574.0" y="1173.0" />
+      <point x="1385.7" y="1173.0" />
+      <point x="32.200000000000045" y="25.0" />
+    </edge>
+    <edge source="Intervalo" target="java.io.Serializable">
+      <point x="-70.5" y="-92.0" />
+      <point x="826.0" y="151.0" />
+      <point x="692.0" y="151.0" />
+      <point x="32.5" y="13.0" />
+    </edge>
+    <edge source="Impresor" target="Visitor">
+      <point x="0.0" y="-92.0" />
+      <point x="0.0" y="47.0" />
+    </edge>
+    <edge source="Proyecto" target="Actividad">
+      <point x="0.0" y="-136.5" />
+      <point x="508.49999999999994" y="539.0" />
+      <point x="572.75" y="539.0" />
+      <point x="-54.25" y="169.0" />
+    </edge>
+    <edge source="ElementoTitulo" target="Elemento">
+      <point x="0.0" y="-70.0" />
+      <point x="1160.5" y="1173.0" />
+      <point x="1321.3" y="1173.0" />
+      <point x="-32.200000000000045" y="25.0" />
+    </edge>
+    <edge source="InformeDetallado" target="Informe">
+      <point x="0.0" y="-81.0" />
+      <point x="260.5" y="1281.0" />
+      <point x="400.75" y="1281.0" />
+      <point x="-75.5" y="81.5" />
+    </edge>
+    <edge source="Tarea" target="Actividad">
+      <point x="5.6843418860808015E-14" y="-103.5" />
+      <point x="745.5" y="539.0" />
+      <point x="681.25" y="539.0" />
+      <point x="54.25" y="169.0" />
+    </edge>
+    <edge source="ElementoSubTitulo" target="Elemento">
+      <point x="0.0" y="-70.0" />
+      <point x="1800.5" y="1163.0" />
+      <point x="1417.9" y="1163.0" />
+      <point x="64.40000000000009" y="25.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.30951101558301986" x="947.5" y="920.5000000000001" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
