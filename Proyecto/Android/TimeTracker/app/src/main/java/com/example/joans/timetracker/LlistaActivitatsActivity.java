@@ -2,16 +2,21 @@ package com.example.joans.timetracker;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -296,7 +301,11 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
         llistaDadesActivitats = new ArrayList<DadesActivitat>();
         //aaAct = new ArrayAdapter<DadesActivitat>(this, layoutID,
         //        llistaDadesActivitats);
-        aaAct = new ArrayAdapter<DadesActivitat>(this, layoutID,
+        // ----------------------------------------------------------------------------
+        // Crear clase "ActivitatAdapter" y sustituir la siguiente linia por tu clase
+        // ----------------------------------------------------------------------------
+
+        aaAct = new ActivitatAdapter(this, layoutID,
                 llistaDadesActivitats);
 
         arrelListView.setAdapter(aaAct);
@@ -373,6 +382,43 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        // anadir button, lo de abajo muestra el dialogo de crear actividad
+        FloatingActionButton anadirbtn = findViewById(R.id.botonAnadir);
+
+        anadirbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String items1[];
+
+                if(activitatPareActualEsArrel)
+                    items1 = new String[]{"Un proyecto"};
+                else
+                    items1 = new String[]{"Un proyecto", "Una tarea"};
+
+                final String items[] = items1;
+                //Rellenar dialogo
+                AlertDialog.Builder builder3 = new AlertDialog.Builder(LlistaActivitatsActivity.this);
+                builder3.setTitle("Qué quieres crear?").setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        
+                        if(which == 0){
+                            // Proyecto
+                        }else{
+                            // tarea
+                        }
+
+
+                        Toast.makeText(getApplicationContext(), "U clicked "+items[which], Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                builder3.show();
+            }
+        });
+
 
     }
 

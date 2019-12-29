@@ -93,7 +93,7 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
         intervalsListView = (ListView) this.findViewById(R.id.listViewIntervals);
 
         llistaDadesIntervals = new ArrayList<DadesInterval>();
-        aaAct = new ArrayAdapter<DadesInterval>(this, layoutID,
+        aaAct = new IntervalAdapter(this, layoutID,
                 llistaDadesIntervals);
         intervalsListView.setAdapter(aaAct);
     }
@@ -147,6 +147,7 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
                                     final Intent intent) {
             Log.d(tag, "onReceive Receptor LlistaIntervals");
             if (intent.getAction().equals(GestorArbreActivitats.TE_FILLS)) {
+                setCronometreIcon();
                 ArrayList<DadesInterval> llistaDadesInter =
                         (ArrayList<DadesInterval>) intent
                                 .getSerializableExtra("llista_dades_intervals");
@@ -158,6 +159,10 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
             }
             Log.i(tag, "final de onReceive LlistaIntervals");
         }
+    }
+
+    private void setCronometreIcon() {
+
     }
 
     /**

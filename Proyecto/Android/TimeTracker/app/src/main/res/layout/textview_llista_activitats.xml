@@ -1,7 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ Constraint layout
+    icono
+    textview titulo
+    textview duracion
+    button basura
+    icon grabando es el color de background
+    boton play y pause si es una tarea
+
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:textAppearance="?android:attr/textAppearanceLarge"
     android:id="@+id/textView">
-</TextView>
+</TextView> -->
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/icono_actividad"
+        android:layout_width="64dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@mipmap/icono_proyecto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <ImageView
+        android:id="@+id/icono_basura"
+        android:layout_width="34dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@mipmap/icono_basura"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/duracion"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <ImageView
+        android:id="@+id/icono_play"
+        android:layout_width="54dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@mipmap/icono_play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/icono_basura"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <TextView
+        android:id="@+id/nombre"
+        android:layout_width="74dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/icono_actividad"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <TextView
+        android:id="@+id/duracion"
+        android:layout_width="128dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nombre"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+</android.support.constraint.ConstraintLayout>

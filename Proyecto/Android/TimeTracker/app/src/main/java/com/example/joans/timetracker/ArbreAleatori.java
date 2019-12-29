@@ -142,7 +142,7 @@ public class ArbreAleatori {
                     for (int j = 0; j < nActivitats; j++) {
                         fesActivitatsFilles(projPare, ratio,
                                 nMaximIntervalsFills, dataFi,
-                                duradaMinimaInterval, duradaMaximaInterval);
+                                duradaMinimaInterval, duradaMaximaInterval, i == 0);
                     }
                 }
             }
@@ -190,12 +190,12 @@ public class ArbreAleatori {
      */
     private void fesActivitatsFilles(Projecte projPare, final double ratio,
             final int nMaximIntervalsFills, final Date dataFi,
-            final long duradaMinimaInterval, final long duradaMaximaInterval) {
+            final long duradaMinimaInterval, final long duradaMaximaInterval, boolean onlyProjects) {
         final int selectorXifresNom = 1000; // noms de 3 xifres
         String nom = Integer.toString((int) Math.abs(selectorXifresNom
                 * rand.nextDouble()));
         String descr = Long.toString(Math.abs(rand.nextLong()));
-        if (rand.nextDouble() < ratio) {
+        if (onlyProjects || rand.nextDouble() < ratio) {
             // faig un projecte fill
             Projecte p = new Projecte("P " + nom, descr, projPare);
             Log.d(tag,
