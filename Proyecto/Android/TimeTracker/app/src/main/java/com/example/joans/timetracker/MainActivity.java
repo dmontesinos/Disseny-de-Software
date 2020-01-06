@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+//Es la activity de inicio, muestra la pantalla prinicipal con un botón
+//que nos envia a la siguiente activity.
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         butoPerComensar.setOnClickListener(butoStartListener);
     }
 
+    //El botón de comenzar te envia a la lista de Actividades
     private View.OnClickListener butoStartListener = new View.OnClickListener() {
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, LlistaActivitatsActivity.class);

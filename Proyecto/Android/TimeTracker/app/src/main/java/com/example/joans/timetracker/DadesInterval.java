@@ -78,6 +78,40 @@ public class DadesInterval implements Serializable {
         // hores, minuts i segons, és redundant amb DadesActivitat.
         // Fer un mètode estàtic en alguna classe a l'efecte.
 
+        String strdurada = getDuradaString();
+        return strdi + "-->" + strdf + " = " + strdurada;
+    }
+
+    //Funcion modificada que da forma y devuelve la fecha inicial
+    public final String getDataI() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        String strdi = sdf.format(dataInicial);
+
+
+        // TODO : aquest codi de conversió de durada en segons a
+        // hores, minuts i segons, és redundant amb DadesActivitat.
+        // Fer un mètode estàtic en alguna classe a l'efecte.
+
+
+        return strdi ;
+    }
+
+    //Funcion modificada que da forma y devuelve la fecha inicial
+    public final String getDataF() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        String strdf = sdf.format(dataFinal);
+
+
+        // TODO : aquest codi de conversió de durada en segons a
+        // hores, minuts i segons, és redundant amb DadesActivitat.
+        // Fer un mètode estàtic en alguna classe a l'efecte.
+
+
+        return strdf ;
+    }
+
+    public String getDuradaString() {
+
         /**
          * Factor de conversió
          */
@@ -94,8 +128,7 @@ public class DadesInterval implements Serializable {
         long segons = (long) (durada - segonsPerHora * hores
                 - segonsPerMinut * minuts);
         // String strdurada = Long.toString(durada);
-        String strdurada = hores + "h " + minuts + "m " + segons + "s";
-        return strdi + "-->" + strdf + " = " + strdurada;
+        return hores + "h " + minuts + "m " + segons + "s";
     }
 
     // Getters

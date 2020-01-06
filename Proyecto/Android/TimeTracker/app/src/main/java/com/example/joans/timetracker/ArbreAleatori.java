@@ -197,13 +197,13 @@ public class ArbreAleatori {
         String descr = Long.toString(Math.abs(rand.nextLong()));
         if (onlyProjects || rand.nextDouble() < ratio) {
             // faig un projecte fill
-            Projecte p = new Projecte("P " + nom, descr, projPare);
+            Projecte p = new Projecte( nom, descr, projPare);
             Log.d(tag,
                     "faig projecte " + p.getNom() + " fill de "
                             + projPare.getNom());
         } else {
             // faig una tasca filla i els seus intervals
-            Tasca tasca = new Tasca("T " + nom, descr, projPare);
+            Tasca tasca = new Tasca( nom, descr, projPare);
             Log.d(tag,
                     "faig tasca " + tasca.getNom() + " filla de "
                             + projPare.getNom());

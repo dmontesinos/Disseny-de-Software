@@ -8,26 +8,27 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".TascaActivity"></activity>
+        <activity android:name=".ProjecteActivity" />
+        <activity android:name=".InformeActivity" />
+        <activity android:name=".InfoActivitatActivity" />
+        <activity android:name=".NouInformeActivity" />
+        <activity android:name=".InfoIntervalActivity" />
+        <activity android:name=".NouTascaActivity" />
+        <activity android:name=".NouProjecteActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".LlistaActivitatsActivity">
-        </activity>
-
-        <activity
-            android:name=".LlistaIntervalsActivity">
-        </activity>
+        <activity android:name=".LlistaActivitatsActivity" />
+        <activity android:name=".LlistaIntervalsActivity" />
 
         <service
-            android:name="GestorArbreActivitats"
-            android:enabled="true" >
-        </service>
-
+            android:name=".GestorArbreActivitats"
+            android:enabled="true" />
     </application>
 
 </manifest>

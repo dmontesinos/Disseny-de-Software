@@ -21,8 +21,8 @@ android {
     sourceSets {
         main {
             java {
-                    exclude 'nucli/GeneradorTicks.java'
-                    exclude 'nucli/Rellotge.java'
+                exclude 'nucli/GeneradorTicks.java'
+                exclude 'nucli/Rellotge.java'
             }
         }
     }

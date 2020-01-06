@@ -22,15 +22,16 @@
 
     <ImageView
         android:id="@+id/icono_actividad"
-        android:layout_width="64dp"
-        android:layout_height="56dp"
+        android:layout_width="54dp"
+        android:layout_height="46dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:src="@mipmap/icono_proyecto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></ImageView>
 
     <ImageView
         android:id="@+id/icono_basura"
@@ -41,25 +42,28 @@
         android:layout_marginBottom="5dp"
         android:src="@mipmap/icono_basura"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/duracion"
+        app:layout_constraintStart_toEndOf="@+id/duracion_i"
         app:layout_constraintTop_toTopOf="parent"></ImageView>
 
     <ImageView
         android:id="@+id/icono_play"
         android:layout_width="54dp"
         android:layout_height="46dp"
-        android:layout_marginStart="3dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:background="#003C3F41"
         android:src="@mipmap/icono_play"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.193"
         app:layout_constraintStart_toEndOf="@+id/icono_basura"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></ImageView>
 
     <TextView
         android:id="@+id/nombre"
-        android:layout_width="74dp"
-        android:layout_height="26dp"
+        android:layout_width="42dp"
+        android:layout_height="25dp"
         android:layout_marginStart="3dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
@@ -70,16 +74,17 @@
         app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <TextView
-        android:id="@+id/duracion"
-        android:layout_width="128dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="2dp"
+        android:id="@+id/duracion_i"
+        android:layout_width="157dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="3dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="16sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nombre"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.531"></TextView>
 
 </android.support.constraint.ConstraintLayout>

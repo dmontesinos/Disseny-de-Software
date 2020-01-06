@@ -6,10 +6,18 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +95,9 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.i(tag, "onCreate intervals");
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         // Tot aquest mecanisme és anàleg al que trobem al onCreate
         // de LlistaActivitatsActivity.
         setContentView(R.layout.activity_llista_intervals);
@@ -96,7 +107,58 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
         aaAct = new IntervalAdapter(this, layoutID,
                 llistaDadesIntervals);
         intervalsListView.setAdapter(aaAct);
+
+
+
+
+        //Enviamos por el intent el intervalo presionado ya que es serializable y lo mandamos a la siguiente activity
+        intervalsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(final AdapterView<?> arg0, final View arg1,
+                                    final int pos, final long id) {
+
+
+                Intent inte = new Intent(LlistaIntervalsActivity.this, InfoIntervalActivity.class);
+                inte.putExtra("dades_interval", llistaDadesIntervals.get(pos));
+                startActivity(inte);
+                return false;
+            }
+        });
     }
+
+    //Funciones que se encargan del funcionamiento del menu para generar informes
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    //Esta funcion sirve para el desplegable del informe, pero a la vez para el boton atras del toolbar
+    //Si una actiivity no tiene informe pero si back, solo poner codigo de back
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_refresh was selected
+            case R.id.item_informe:
+                //Intent que te envia a la activity de generar informe
+                Intent intentInforme = new Intent(LlistaIntervalsActivity.this, NouInformeActivity.class);
+                startActivity(intentInforme);
+
+                break;
+
+
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+        }
+
+        return true;
+    }
+
+
+
+
 
     // Aquests són els "serveis" que demana aquesta classe
     // a la classe Service GestorArbreActivitats

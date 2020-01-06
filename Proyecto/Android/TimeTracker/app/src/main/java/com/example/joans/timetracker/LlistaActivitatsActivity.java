@@ -11,10 +11,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -295,10 +299,18 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.i(tag, "onCreate");
 
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
         setContentView(R.layout.activity_llista_activitats);
         arrelListView = (ListView) this.findViewById(R.id.listViewActivitats);
 
         llistaDadesActivitats = new ArrayList<DadesActivitat>();
+
+        //Sustituido para crear nuestro propio adapter
+
         //aaAct = new ArrayAdapter<DadesActivitat>(this, layoutID,
         //        llistaDadesActivitats);
         // ----------------------------------------------------------------------------
@@ -339,9 +351,21 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
             }
         });
 
+        //Enviamos por el intent la actividad clicada ya que es serializable y lo mandamos a la siguiente activity para utilizar sus datos allí
+        arrelListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view,  final int pos, final long id) {
+                Intent intent_activity = new Intent(LlistaActivitatsActivity.this, InfoActivitatActivity.class);
+                intent_activity.putExtra("dades_activitat", llistaDadesActivitats.get(pos));
+                startActivity(intent_activity);
+                return false;
+            }
+        });
+
         // Un "long click" serveix per cronometrar, si es tracta d'una tasca.
         // Si es un projecte, no fara res.
-        arrelListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        /*arrelListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(final AdapterView<?> arg0,
                                            final View arg1, final int pos, final long id) {
@@ -364,6 +388,8 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
                     inte.putExtra("posicio", pos);
                     sendBroadcast(inte);
                 }
+
+
                 // si es un projecte, no fem res
 
                 // Important :
@@ -382,8 +408,12 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
                 return true;
             }
         });
+*/
 
-        // anadir button, lo de abajo muestra el dialogo de crear actividad
+
+
+
+        // Capturamos el botón flotante y según si es una tarea o un proyecto, muestra un diálogo u otro
         FloatingActionButton anadirbtn = findViewById(R.id.botonAnadir);
 
         anadirbtn.setOnClickListener(new View.OnClickListener() {
@@ -405,13 +435,18 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         
                         if(which == 0){
-                            // Proyecto
+                            // Proyecto, te manda a la activity de nuevo Proyecto
+                             Intent intentProyecto = new Intent(LlistaActivitatsActivity.this, NouProjecteActivity.class);
+                             startActivity(intentProyecto);
                         }else{
-                            // tarea
+                            // Tarea, te manda a la activity de nueva Tarea
+                            Intent intentTarea = new Intent(LlistaActivitatsActivity.this, NouTascaActivity.class);
+                            startActivity(intentTarea);
+
                         }
 
 
-                        Toast.makeText(getApplicationContext(), "U clicked "+items[which], Toast.LENGTH_LONG).show();
+
                     }
                 });
 
@@ -420,6 +455,36 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+
+    //Funciones que se encargan del funcionamiento del icono de la appBar del Informe
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.item_informe:
+                // Intent  que te manda a la activity de nuevo informe
+                Intent intentInforme = new Intent(LlistaActivitatsActivity.this, NouInformeActivity.class);
+                startActivity(intentInforme);
+
+                break;
+
+                //Este case se encarga de que el boton de back te lleve hacia atras
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+        }
+
+        return true;
     }
 
     /**
