@@ -25,7 +25,7 @@
         android:id="@+id/tasca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tasca"
+        android:text="Tarea"
         android:textColor="@android:color/background_dark"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

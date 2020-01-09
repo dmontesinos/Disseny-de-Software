@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-//Clase que pide al usuario Nombre y Descripción de un nueva Tarea que desee crear
+//Clase que pide al usuario Nombre y Descripción de un nueva Tarea Básica que desee crear
 
 public class NouTascaActivity extends AppCompatActivity {
 

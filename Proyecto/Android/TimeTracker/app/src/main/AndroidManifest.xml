@@ -8,7 +8,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TascaActivity"></activity>
+        <activity android:name=".NouTascaPTLActivity"></activity>
+        <activity android:name=".NouTascaPActivity" />
+        <activity android:name=".NouTascaTLActivity" />
+        <activity android:name=".TipusTascaActivity" />
+        <activity android:name=".TascaActivity" />
         <activity android:name=".ProjecteActivity" />
         <activity android:name=".InformeActivity" />
         <activity android:name=".InfoActivitatActivity" />

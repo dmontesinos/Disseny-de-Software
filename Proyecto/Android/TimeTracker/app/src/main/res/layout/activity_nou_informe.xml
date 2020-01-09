@@ -26,6 +26,72 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/formatoInforme" />
 
+    <EditText
+        android:id="@+id/campoHDesde"
+        android:layout_width="104dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="56dp"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="18:00 h"
+        android:inputType="date"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/campoDDesde"
+        app:layout_constraintTop_toBottomOf="@+id/desdeInforme2" />
+
+    <EditText
+        android:id="@+id/campoHHasta"
+        android:layout_width="104dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="57dp"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="18:00 h"
+        android:inputType="date"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/campoDHasta"
+        app:layout_constraintTop_toBottomOf="@+id/hastaInforme" />
+
+    <EditText
+        android:id="@+id/campoDDesde"
+        android:layout_width="202dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="21dp"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="08/01/2020"
+        android:inputType="date"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@+id/hastaInforme"
+        app:layout_constraintEnd_toStartOf="@+id/campoHDesde"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/desdeInforme2" />
+
+    <EditText
+        android:id="@+id/campoDHasta"
+        android:layout_width="202dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="08/01/2020"
+        android:inputType="date"
+        android:maxLines="1"
+        app:layout_constraintEnd_toStartOf="@+id/campoHHasta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hastaInforme" />
+
     <Button
         android:id="@+id/botonInforme"
         android:layout_width="wrap_content"
@@ -121,39 +187,5 @@
         app:layout_constraintHorizontal_bias="0.837"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tipoInforme" />
-
-    <TextView
-        android:id="@+id/fechaD_informe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="321dp"
-        android:layout_marginBottom="38dp"
-        android:text="02/01/2020"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/hastaInforme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desdeInforme2"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/fechaH_informe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="322dp"
-        android:layout_marginBottom="49dp"
-        android:text="03/01/2020"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/personalizado"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.085"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hastaInforme"
-        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

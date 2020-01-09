@@ -440,7 +440,7 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
                              startActivity(intentProyecto);
                         }else{
                             // Tarea, te manda a la activity de nueva Tarea
-                            Intent intentTarea = new Intent(LlistaActivitatsActivity.this, NouTascaActivity.class);
+                            Intent intentTarea = new Intent(LlistaActivitatsActivity.this, TipusTascaActivity.class);
                             startActivity(intentTarea);
 
                         }
